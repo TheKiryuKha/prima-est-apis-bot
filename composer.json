@@ -54,8 +54,8 @@
         "lint": "pint",
         "refactor": ["Composer\\Config::disableProcessTimeout", "php -d memory_limit=-1 vendor/bin/rector"],
         "fix": [
-            "@lint",
-            "@refactor"
+            "@refactor",
+            "@lint"
         ],
         "test:lint": "pint --test",
         "test:refactor": "php -d memory_limit=-1 vendor/bin/rector --dry-run",
