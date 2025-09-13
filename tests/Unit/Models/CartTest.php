@@ -17,3 +17,24 @@ test('to array', function () {
             'id',
         ]);
 });
+
+test('setPrice', function () {
+    $cart = Cart::factory()->price(100)->create();
+
+    $this->assertDatabaseHas('carts', [
+        'id' => $cart->id,
+        'price' => 100 * 100,
+    ]);
+});
+
+test('getPrice', function () {
+    $cart = Cart::factory()->price(100)->create();
+
+    expect($cart->price)->toBe(100);
+});
+
+test('getFormattedPrice', function () {
+    $cart = Cart::factory()->price(1000)->create();
+
+    expect($cart->formatted_price)->toBe('1 000₽');
+});

@@ -25,6 +25,7 @@ final class ProductOption extends Model
     /** @use HasFactory<\Database\Factories\ProductOptionFactory> */
     use HasFactory;
 
+    // TODO remove accesors and mutators to builder class
     public function setPriceAttribute(int $value): void
     {
         $this->attributes['price'] = round($value * 100);

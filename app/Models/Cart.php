@@ -20,4 +20,23 @@ final class Cart extends Model
 {
     /** @use HasFactory<\Database\Factories\CartFactory> */
     use HasFactory;
+
+    // TODO remove to builder class
+    public function setPriceAttribute(int $value): void
+    {
+        $this->attributes['price'] = round($value * 100);
+    }
+
+    public function getPriceAttribute(int $value): int
+    {
+        return $value / 100;
+    }
+
+    public function getFormattedPriceAttribute(): string
+    {
+        return number_format(
+            num: $this->price,
+            thousands_separator: ' '
+        ).'₽';
+    }
 }

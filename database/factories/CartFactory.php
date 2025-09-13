@@ -23,4 +23,11 @@ final class CartFactory extends Factory
             'price' => 0,
         ];
     }
+
+    public function price(int $price): self
+    {
+        return $this->state(fn (array $attributes): array => [
+            'price' => $price,
+        ]);
+    }
 }
