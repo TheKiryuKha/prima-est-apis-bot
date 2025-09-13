@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Cart;
+use App\Models\CartItem;
 
 test('to array', function () {
     $cart = Cart::factory()->create();
@@ -37,4 +38,13 @@ test('getFormattedPrice', function () {
     $cart = Cart::factory()->price(1000)->create();
 
     expect($cart->formatted_price)->toBe('1 000₽');
+});
+
+it('has items', function () {
+    $item = CartItem::factory()->make();
+    $cart = Cart::factory()->create();
+
+    $cart->items()->save($item);
+
+    expect($cart->items)->toHaveCount(1);
 });
