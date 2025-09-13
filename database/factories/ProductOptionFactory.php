@@ -28,4 +28,11 @@ final class ProductOptionFactory extends Factory
             'product_id' => Product::factory(),
         ];
     }
+
+    public function price(int $price): self
+    {
+        return $this->state(fn (array $attributes) => [
+            'price' => $price,
+        ]);
+    }
 }

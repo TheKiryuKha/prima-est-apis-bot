@@ -25,3 +25,24 @@ it('belongs to Product', function () {
 
     expect($product_option->product)->toBeInstanceOf(Product::class);
 });
+
+test('setPrice', function () {
+    $product_option = ProductOption::factory()->price(100)->create();
+
+    $this->assertDatabaseHas('product_options', [
+        'id' => $product_option->id,
+        'price' => 100 * 100,
+    ]);
+});
+
+test('getPrice', function () {
+    $product_option = ProductOption::factory()->price(100)->create();
+
+    expect($product_option->price)->toBe(100);
+});
+
+test('getFormattedPrice', function () {
+    $product_option = ProductOption::factory()->price(1000)->create();
+
+    expect($product_option->formatted_price)->toBe('1 000₽');
+});
