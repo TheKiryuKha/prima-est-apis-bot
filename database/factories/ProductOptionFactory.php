@@ -31,7 +31,7 @@ final class ProductOptionFactory extends Factory
 
     public function price(int $price): self
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'price' => $price,
         ]);
     }
