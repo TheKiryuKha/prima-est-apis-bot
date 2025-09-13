@@ -7,7 +7,6 @@ namespace App\Providers;
 use Carbon\CarbonImmutable;
 use Date;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -35,7 +34,9 @@ final class AppServiceProvider extends ServiceProvider
 
     private function configureDBCommands(): void
     {
-        DB::prohibitDestructiveCommands();
+        DB::prohibitDestructiveCommands(
+            app()->isProduction()
+        );
     }
 
     private function configureUrls(): void
