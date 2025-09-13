@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Product;
 use App\Models\ProductOption;
 
 test('to array', function () {
@@ -17,4 +18,10 @@ test('to array', function () {
             'created_at',
             'updated_at',
         ]);
+});
+
+it('belongs to Product', function () {
+    $product_option = ProductOption::factory()->create();
+
+    expect($product_option->product)->toBeInstanceOf(Product::class);
 });

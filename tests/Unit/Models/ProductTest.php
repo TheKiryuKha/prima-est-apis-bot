@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Enums\ProductStatus;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductOption;
 
 test('to array', function () {
     $product = Product::factory()->create()->fresh();
@@ -34,4 +35,13 @@ it('belongs to Category', function () {
     $product = Product::factory()->create();
 
     expect($product->category)->toBeInstanceOf(Category::class);
+});
+
+it('has options', function () {
+    $option = ProductOption::factory()->make();
+    $product = Product::factory()->create();
+
+    $product->options()->save($option);
+
+    expect($product->options)->toHaveCount(1);
 });

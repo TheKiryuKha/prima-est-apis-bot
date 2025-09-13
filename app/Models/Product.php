@@ -6,9 +6,11 @@ namespace App\Models;
 
 use App\Enums\ProductStatus;
 use Carbon\CarbonInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property-read int $id
@@ -21,6 +23,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  * @property-read Category $category
+ * @property-read Collection<int, ProductOption> $options
  */
 final class Product extends Model
 {
@@ -33,6 +36,14 @@ final class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * @return HasMany<ProductOption, $this>
+     */
+    public function options(): HasMany
+    {
+        return $this->hasMany(ProductOption::class);
     }
 
     /**
