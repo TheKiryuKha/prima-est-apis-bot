@@ -3,6 +3,7 @@ import asyncio
 from dotenv import load_dotenv
 import os
 from pathlib import Path
+from utils.commands import set_commands
 
 env_path = Path(__file__).parent.parent / '.env'
 load_dotenv(dotenv_path=env_path)
@@ -20,6 +21,7 @@ dp.startup.register(start_bot)
 
 
 async def start():
+    await set_commands(bot)
     try:
         await dp.start_polling(bot, skip_updates=True)
     finally:
