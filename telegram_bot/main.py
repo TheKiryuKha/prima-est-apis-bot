@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 import os
 from pathlib import Path
 from utils.commands import set_commands
+from handlers.start import get_start
+from aiogram.filters import Command
 
 env_path = Path(__file__).parent.parent / '.env'
 load_dotenv(dotenv_path=env_path)
@@ -19,6 +21,7 @@ async def start_bot(bot: Bot):
 
 dp.startup.register(start_bot)
 
+dp.message.register(get_start, Command(commands='start'))
 
 async def start():
     await set_commands(bot)
