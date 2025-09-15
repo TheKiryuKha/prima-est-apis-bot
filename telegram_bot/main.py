@@ -6,6 +6,10 @@ from pathlib import Path
 from utils.commands import set_commands
 from handlers.handlers import register_handlers
 
+# TODO config
+# TODO auth
+# TODO delete message after writing new 
+
 env_path = Path(__file__).parent.parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
