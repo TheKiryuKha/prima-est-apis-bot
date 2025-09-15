@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.4",
         "laravel/framework": "^12.18.0",
+        "laravel/sanctum": "^4.0",
         "nunomaduro/essentials": "@dev"
     },
     "require-dev": {
@@ -14,6 +15,7 @@
         "larastan/larastan": "^3.4.2",
         "laravel/pail": "^1.2.3",
         "laravel/pint": "^1.22.1",
+        "laravel/tinker": "^2.10",
         "mockery/mockery": "^1.6.12",
         "nunomaduro/collision": "^8.8.1",
         "peckphp/peck": "^0.1.3",
