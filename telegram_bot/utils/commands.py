@@ -11,6 +11,10 @@ async def set_commands(bot: Bot):
         BotCommand(
             command='help',
             description='Помощь'
+        ),
+        BotCommand(
+            command='shop',
+            description='Магазин'
         )
     ]
 
