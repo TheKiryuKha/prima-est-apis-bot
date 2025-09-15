@@ -1,0 +1,29 @@
+from aiogram import Bot, Dispatcher
+import asyncio
+from dotenv import load_dotenv
+import os
+from pathlib import Path
+
+env_path = Path(__file__).parent.parent / '.env'
+load_dotenv(dotenv_path=env_path)
+
+token = os.getenv('TELEGRAM_BOT_TOKEN')
+admin_id = os.getenv('TELEGRAM_ADMIN_ID');
+
+bot = Bot(token=token)
+dp = Dispatcher()
+
+async def start_bot(bot: Bot):
+    await bot.send_message(admin_id, text='Я запустил бота!')
+
+dp.startup.register(start_bot)
+
+
+async def start():
+    try:
+        await dp.start_polling(bot, skip_updates=True)
+    finally:
+        await bot.session.close()
+
+if __name__ == '__main__':
+    asyncio.run(start())
