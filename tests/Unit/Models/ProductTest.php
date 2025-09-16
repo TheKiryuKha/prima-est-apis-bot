@@ -21,6 +21,7 @@ test('to array', function () {
             'category_id',
             'created_at',
             'updated_at',
+            'honey_plants',
         ]);
 });
 
