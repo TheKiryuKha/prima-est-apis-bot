@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @property-read int $id
@@ -25,10 +27,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read Category $category
  * @property-read Collection<int, ProductOption> $options
  */
-final class Product extends Model
+final class Product extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
+
+    use InteractsWithMedia;
 
     /**
      * @return BelongsTo<Category, $this>
@@ -54,5 +58,10 @@ final class Product extends Model
         return [
             'status' => ProductStatus::class,
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('image')->singleFile();
     }
 }

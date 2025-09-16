@@ -46,3 +46,13 @@ it('has options', function () {
 
     expect($product->options)->toHaveCount(1);
 });
+
+test("media collectoin's", function () {
+    $product = Product::factory()->create();
+
+    $is_exists = $product
+        ->getRegisteredMediaCollections()
+        ->contains('name', 'image');
+
+    expect($is_exists)->toBeTrue();
+});
