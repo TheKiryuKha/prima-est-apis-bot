@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property-read int $id
- * @property-read int $volume
+ * @property-read string $volume
  * @property-read int $price
  * @property-read string $type
  * @property-read int $product_id

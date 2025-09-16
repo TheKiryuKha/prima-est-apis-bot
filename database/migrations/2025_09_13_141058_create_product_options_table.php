@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('product_options', function (Blueprint $table): void {
             $table->id();
 
-            $table->unsignedBigInteger('volume');
+            $table->string('volume');
             $table->unsignedBigInteger('price');
             $table->string('type');
 
