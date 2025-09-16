@@ -1,16 +1,10 @@
 from aiogram import Bot
 from aiogram.types import Message
 from keyboards.categories_keyboard import create_kb
+from utils.clear_messages import clear
 
 async def shop(message: Message, bot: Bot):
 
-    chat_id = message.from_user.id
+    await clear(message, bot)
 
-    await bot.delete_message(chat_id, message.message_id)
-
-    try:
-        await bot.delete_message(chat_id, message.message_id - 1)
-    except Exception:
-        pass
-
-    await bot.send_message(chat_id, f'Наши товары:', reply_markup=create_kb())
+    await bot.send_message(message.from_user.id, f'Наши товары:', reply_markup=create_kb())
