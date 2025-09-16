@@ -1,26 +1,16 @@
 from aiogram import Bot, Dispatcher
 import asyncio
-from dotenv import load_dotenv
-import os
-from pathlib import Path
 from utils.commands import set_commands
 from handlers.handlers import register_handlers
+from config import TOKEN, ADMIN_ID
 
-# TODO config
 # TODO auth
-# TODO delete message after writing new 
 
-env_path = Path(__file__).parent.parent / '.env'
-load_dotenv(dotenv_path=env_path)
-
-token = os.getenv('TELEGRAM_BOT_TOKEN')
-admin_id = os.getenv('TELEGRAM_ADMIN_ID');
-
-bot = Bot(token=token)
+bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
 async def start_bot(bot: Bot):
-    await bot.send_message(admin_id, text='Я запустил бота!')
+    await bot.send_message(ADMIN_ID, text='Я запустил бота!')
 
 dp.startup.register(start_bot)
 
