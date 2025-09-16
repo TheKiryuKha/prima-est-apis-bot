@@ -1,30 +1,10 @@
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-
+import requests
 
 def create_kb():
-    categories = [
-        {
-            'id': 1,
-            'attributes': {
-                'title': 'Мёд'
-            }
-        },
-        {
-            'id': 2,
-            'attributes': {
-                'title': 'Воск'
-            }
-        },
-        {
-            'id': 3,
-            'attributes': {
-                'id': 1,
-                'title': 'Забрус'
-            }
-        },
-    ]
+    response = requests.get('http://prima-est-apis-bot.test/api/v1/categories')
     kb = InlineKeyboardBuilder()
-    for category in categories:
+    for category in response.json()['data']:
         kb.button(
             text=f'{category['attributes']['title']}',
             callback_data=f'{category['id']}'
