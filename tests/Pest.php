@@ -13,6 +13,9 @@ declare(strict_types=1);
 |
 */
 
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\ProductOption;
 use Illuminate\Support\Sleep;
 
 pest()->extend(Tests\TestCase::class)
@@ -56,4 +59,20 @@ expect()->extend('toBeOne', function () {
 function something()
 {
     // ..
+}
+
+function createProducts(
+    Category $category,
+    int $products_amount = 3,
+    int $products_options_amount = 3
+) {
+    $products = Product::factory($products_amount)
+        ->for($category)
+        ->create();
+
+    foreach ($products as $product) {
+        ProductOption::factory($products_options_amount)
+            ->for($product)
+            ->create();
+    }
 }

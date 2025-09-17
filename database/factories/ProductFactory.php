@@ -27,4 +27,11 @@ final class ProductFactory extends Factory
             'status' => ProductStatus::InStock,
         ];
     }
+
+    public function hidden(): self
+    {
+        return $this->state(fn (array $attributes): array => [
+            'status' => ProductStatus::Hidden,
+        ]);
+    }
 }
