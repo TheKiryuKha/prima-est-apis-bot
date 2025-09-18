@@ -8,7 +8,7 @@ def create_kb():
     for category in response.json()['data']:
         kb.button(
             text=f'{category['attributes']['title']}',
-            callback_data=f'category: ' + f'{category['id']}'
+            callback_data=f'category_' + f'{category['id']}'
         )
     kb.adjust(1)
     return kb.as_markup()
