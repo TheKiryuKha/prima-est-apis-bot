@@ -1,11 +1,10 @@
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-import requests
-from config import API_URL
+from utils.api import get_categories
+
 
 def create_kb():
-    response = requests.get(API_URL + 'categories')
     kb = InlineKeyboardBuilder()
-    for category in response.json()['data']:
+    for category in get_categories():
         kb.button(
             text=f'{category['attributes']['title']}',
             callback_data=f'category_' + f'{category['id']}'
