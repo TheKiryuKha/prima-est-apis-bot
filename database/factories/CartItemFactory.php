@@ -26,4 +26,11 @@ final class CartItemFactory extends Factory
             'amount' => fake()->numberBetween(1, 7),
         ];
     }
+
+    public function amount(int $amount): self
+    {
+        return $this->state(fn (array $attributes): array => [
+            'amount' => $amount,
+        ]);
+    }
 }
