@@ -17,3 +17,7 @@ Route::prefix('users')->as('users:')->group(
 Route::prefix('cart_items')->as('cart_items:')->group(
     base_path('routes/api/v1/cart_item.php')
 );
+
+Route::prefix('carts')->as('carts:')->group(
+    base_path('routes/api/v1/cart.php')
+);
