@@ -8,6 +8,7 @@ use App\Models\Traits\HasPrice;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -26,11 +27,26 @@ final class Cart extends Model
 
     use HasPrice;
 
+    public static function getByChatId(int $chat_id): self
+    {
+        return User::where('chat_id', $chat_id)
+            ->firstOrFail()
+            ->cart;
+    }
+
     /**
      * @return HasMany<CartItem, $this>
      */
     public function items(): HasMany
     {
         return $this->hasMany(CartItem::class);
+    }
+
+    /**
+     * @return BelongsTo<User, $this>
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

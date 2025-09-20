@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\User;
 
 test('to array', function () {
     $cart = Cart::factory()->create();
@@ -47,4 +48,14 @@ it('has items', function () {
     $cart->items()->save($item);
 
     expect($cart->items)->toHaveCount(1);
+});
+
+test('getByChatId', function () {
+    Cart::factory()->for(
+        User::factory()->chat_id(1)
+    )->create();
+
+    $cart = Cart::getByChatId(1);
+
+    expect($cart)->toBeInstanceOf(Cart::class);
 });

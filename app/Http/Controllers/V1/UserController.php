@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 
 final readonly class UserController
 {
+    // TODO return resource
     public function store(CreateUserRequest $request, CreateUserAction $action): JsonResponse
     {
         $action->handle($request->validated());

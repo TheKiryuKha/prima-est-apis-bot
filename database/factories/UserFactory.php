@@ -24,4 +24,11 @@ final class UserFactory extends Factory
             'remember_token' => Str::random(10),
         ];
     }
+
+    public function chat_id(int $id): self
+    {
+        return $this->state(fn (array $attributes): array => [
+            'chat_id' => $id,
+        ]);
+    }
 }

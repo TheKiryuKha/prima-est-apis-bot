@@ -13,3 +13,7 @@ Route::prefix('products')->as('products:')->group(
 Route::prefix('users')->as('users:')->group(
     base_path('routes/api/v1/user.php')
 );
+
+Route::prefix('cart_items')->as('cart_items:')->group(
+    base_path('routes/api/v1/cart_item.php')
+);
