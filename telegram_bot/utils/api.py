@@ -12,3 +12,11 @@ def get_products(category_id: int):
 
 def get_product(product_id: int):
     return requests.get(API_URL + 'products/' + str(product_id)).json()['data']
+
+def add_product_to_cart(option_id: int, amount: int, chat_id: int):
+    payload = {
+        "chat_id": chat_id,
+        "option_id": option_id,
+        "amount": amount
+    }
+    return requests.post(API_URL + 'cart_items/', json=payload).json()
