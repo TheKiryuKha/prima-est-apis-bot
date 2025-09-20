@@ -23,5 +23,5 @@ async def show(update: CallbackQuery, bot: Bot):
     await clear(update, bot)
 
     product = get_product(update.data.split('_')[1])
-    print(product)
+
     await show_product(update, bot, product) 
