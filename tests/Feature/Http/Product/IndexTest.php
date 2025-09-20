@@ -3,10 +3,15 @@
 declare(strict_types=1);
 
 use App\Models\Category;
+use App\Models\Product;
 
 beforeEach(function () {
     $this->category = Category::factory()->create();
-    createProducts($this->category);
+    Product::factory(3)
+        ->for($this->category)
+        ->withImage()
+        ->withOptions(3)
+        ->create();
 });
 
 it("return's correct status code", function () {
@@ -31,9 +36,11 @@ it("return's correct data", function () {
                 'type',
                 'attributes' => [
                     'title',
+                    'type',
                     'status',
                     'description',
                     'amount',
+                    'honey_plants',
                     'options' => [
                         '*' => [
                             'id',
@@ -45,6 +52,10 @@ it("return's correct data", function () {
                                 'formatted_price',
                             ],
                         ],
+                    ],
+                    'media' => [
+                        'type',
+                        'path',
                     ],
                 ],
             ],

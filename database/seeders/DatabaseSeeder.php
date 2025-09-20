@@ -31,6 +31,9 @@ final class DatabaseSeeder extends Seeder
             'description' => 'Мёд - единственный продукт, не имеющий срока годности. Майский мёд не исключение, он вечный. К тому же, является деликатесом. Обладает свойством оставаться жидким (не подвержен кристаллизации), что позволяет оставлять его пчелам для прокорма прямо в сотах во время зимовки. Ничто не вечно под луной… Кроме, может, майского меда.',
             'honey_plants' => 'черноклён, акация, фруктовый сад, черешня, малина',
         ]);
+        $product->addMedia(
+            public_path('assets/images/endless_spring_image.MP4')
+        )->preservingOriginal()->toMediaCollection('image');
 
         ProductOption::factory()->for($product)->create([
             'volume' => '250 мл',
@@ -56,6 +59,9 @@ final class DatabaseSeeder extends Seeder
             'description' => 'Заброшенные шахты, туман. Окруженный терриконами город-призрак Гуково был основан в 1878 году и со временем стал прототипом вымышленного Сайлент Хилл. В нём и производится этот вкусный мёд.',
             'honey_plants' => 'Медоносы: сафлора, синяк, шалфей, донник',
         ]);
+        $product->addMedia(
+            public_path('assets/images/sillent_hill_image.MP4')
+        )->preservingOriginal()->toMediaCollection('image');
 
         ProductOption::factory()->for($product)->create([
             'volume' => '250 мл',
@@ -81,6 +87,9 @@ final class DatabaseSeeder extends Seeder
             'description' => 'Боржоми - это не только бутылка минералки. Самый старый 5500-летний мед был найден на месте захоронения именно в городе Боржоми (Грузия), а не в Египте. В разграбленной гробнице обнаружили керамические сосуды с остатками меда, ритуально оставленным для будущих загробных трапез. По результатам биологического анализа мёд был липовым.',
             'honey_plants' => 'липа',
         ]);
+        $product->addMedia(
+            public_path('assets/images/ancient_image.MP4')
+        )->preservingOriginal()->toMediaCollection('image');
 
         ProductOption::factory()->for($product)->create([
             'volume' => '250 мл',
@@ -106,6 +115,9 @@ final class DatabaseSeeder extends Seeder
             'description' => 'Пыльца с крыльев южных эльфов не горчит и обладает исцеляющими свойствами для мышц после тренировки. Гипоаллергенна, потому ценится как средство фокусировки внимания даже среди аллергиков, тяжело переживающих цветение весны.',
             'honey_plants' => 'акация, софлора, клевер, синяк, шалфей, донник.',
         ]);
+        $product->addMedia(
+            public_path('assets/images/polling.MOV')
+        )->preservingOriginal()->toMediaCollection('image');
 
         ProductOption::factory()->for($product)->create([
             'volume' => '100 гр',
@@ -135,6 +147,9 @@ final class DatabaseSeeder extends Seeder
                 Процесс жевания снижает уровень кортизола.',
             'honey_plants' => 'Медоносы: сезонные.',
         ]);
+        $product->addMedia(
+            public_path('assets/images/lining_image.jpg')
+        )->preservingOriginal()->toMediaCollection('image');
 
         ProductOption::factory()->for($product)->create([
             'volume' => '250 мл',

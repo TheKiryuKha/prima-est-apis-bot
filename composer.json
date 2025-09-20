@@ -70,6 +70,12 @@
             "@test:refactor",
             "@test:types",
             "@test:unit"
+        ],
+
+        "db:refresh": [
+            "php artisan db:wipe --force",
+            "php artisan migrate",
+            "php artisan db:seed"
         ]
     },
     "extra": {
