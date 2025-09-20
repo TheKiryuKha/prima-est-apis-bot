@@ -18,4 +18,9 @@ final readonly class ProductController
 
         return ProductResource::collection($products->get());
     }
+
+    public function show(Product $product): ProductResource
+    {
+        return new ProductResource($product);
+    }
 }
