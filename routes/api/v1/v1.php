@@ -9,3 +9,7 @@ Route::prefix('categories')->as('categories:')->group(
 Route::prefix('products')->as('products:')->group(
     base_path('routes/api/v1/product.php')
 );
+
+Route::prefix('users')->as('users:')->group(
+    base_path('routes/api/v1/user.php')
+);

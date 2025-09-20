@@ -10,11 +10,11 @@ beforeEach(function () {
     $this->option = ProductOption::factory()
         ->for($this->product)
         ->create();
-    
+
     $this->data = [
         'chat_id' => 1,
         'option_id' => $this->option->id,
-        'amount' => 3
+        'amount' => 3,
     ];
 });
 

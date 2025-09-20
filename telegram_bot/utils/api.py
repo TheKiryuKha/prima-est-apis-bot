@@ -1,6 +1,11 @@
 import requests
 from config import API_URL
 
+headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+}
+
 def get_categories():
     return requests.get(API_URL + 'categories').json()['data']
 
@@ -19,4 +24,11 @@ def add_product_to_cart(option_id: int, amount: int, chat_id: int):
         "option_id": option_id,
         "amount": amount
     }
-    return requests.post(API_URL + 'cart_items/', json=payload).json()
+    return requests.post(API_URL + 'cart_items/', data=payload).json()
+
+def create_user(chat_id: int, username: str):
+    data = {
+        "chat_id": chat_id,
+        "username": username
+    }
+    return requests.post(API_URL + 'users/', headers=headers, data=data)

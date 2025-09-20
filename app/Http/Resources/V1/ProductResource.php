@@ -34,7 +34,7 @@ final class ProductResource extends JsonResource
                     $this->whenLoaded('options')
                 ),
                 'media' => new MediaResource(
-                    $this->getMedia('image')->first()
+                    $this->resource->getMedia('image')->first()
                 ),
             ],
         ];
