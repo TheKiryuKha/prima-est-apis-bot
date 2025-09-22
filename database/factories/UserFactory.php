@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -30,5 +31,16 @@ final class UserFactory extends Factory
         return $this->state(fn (array $attributes): array => [
             'chat_id' => $id,
         ]);
+    }
+
+    public function withCart(int $items_amount = 0): self
+    {
+        return $this->state(fn (array $attributes): array => [])
+            ->afterCreating(function (User $user) use ($items_amount): void {
+                Cart::factory()
+                    ->withItem($items_amount)
+                    ->for($user)
+                    ->create();
+            });
     }
 }
