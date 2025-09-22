@@ -10,10 +10,11 @@ def options_kb(options, cart):
             callback_data=f'addToCart_' + f'{option['id']}'
         )
     
-    kb.button(
-        text=f"Корзина {cart['attributes']['products_amount']} шт. | {cart['attributes']['formatted_price']}",
-        callback_data='cart'
-    )
+    if cart['attributes']['products_amount'] > 0:
+        kb.button(
+            text=f"Корзина {cart['attributes']['products_amount']} шт. | {cart['attributes']['formatted_price']}",
+            callback_data='cart'
+        )
 
     kb.adjust(1)
     return kb.as_markup()   
