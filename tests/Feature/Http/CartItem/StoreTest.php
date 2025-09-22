@@ -26,7 +26,7 @@ it("return's correct status code", function () {
     $this->post(
         route('api:v1:cart_items:store'), $this->data
     )->assertStatus(
-        201
+        200
     );
 });
 
@@ -90,5 +90,28 @@ it("update's alredy existing cart item amount", function () {
     $this->assertDatabaseHas('cart_items', [
         'product_option_id' => $this->option->id,
         'amount' => 2,
+    ]);
+});
+
+it("return's correct data", function () {
+    $response = $this->post(
+        route('api:v1:cart_items:store'), $this->data
+    );
+
+    $response->assertJsonStructure([
+        'data' => [
+            'id',
+            'type',
+            'attributes' => [
+                'title',
+                'type',
+                'status',
+                'description',
+                'amount',
+                'honey_plants',
+                'options',
+                'media',
+            ],
+        ],
     ]);
 });

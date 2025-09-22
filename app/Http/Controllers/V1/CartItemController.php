@@ -7,17 +7,17 @@ namespace App\Http\Controllers\V1;
 use App\Actions\Cart\CreateCartItemAction;
 use App\Actions\Cart\EditCartItemAction;
 use App\Http\Requests\V1\CartItem\CreateCartItemRequest;
+use App\Http\Resources\V1\ProductResource;
 use App\Models\CartItem;
 use Illuminate\Http\JsonResponse;
 
 final readonly class CartItemController
 {
-    // TODO return resource
-    public function store(CreateCartItemRequest $request, CreateCartItemAction $action): JsonResponse
+    public function store(CreateCartItemRequest $request, CreateCartItemAction $action): ProductResource
     {
         $action->handle($request->getCart(), $request->getOption());
 
-        return response()->json(status: 201);
+        return new ProductResource($request->getOption()->product);
     }
 
     public function edit(CartItem $cart_item, EditCartItemAction $action): JsonResponse

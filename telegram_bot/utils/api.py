@@ -32,3 +32,6 @@ def create_user(chat_id: int, username: str):
         "username": username
     }
     return requests.post(API_URL + 'users/', headers=headers, data=data)
+
+def get_cart(chat_id: int):
+    return requests.get(API_URL + f'users/{chat_id}/cart').json()['data']
