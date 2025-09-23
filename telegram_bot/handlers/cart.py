@@ -3,21 +3,27 @@ from aiogram.types import CallbackQuery
 from utils.api import add_product_to_cart, get_cart, get_cart_with_items
 from keyboards.options_keyboard import options_kb
 from utils.clear_messages import clear
-
+from keyboards.cart_keyboard import create_kb
 
 async def show(update: CallbackQuery, bot: Bot):
     await clear(update, bot)
 
-    message = f"<b>Товары:</b>\n"
+    message = f"<b>● Товары:</b>\n"
 
     cart = get_cart_with_items(update.from_user.id)
     
     for item in cart['attributes']['items']:
-        message += f"\n{item['attributes']['amount']} x {item['attributes']['title']} \n"
+        message += f"\n<b>{item['attributes']['title']}</b>"
+        message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']}"
+        message += f"\n———"
+    message += f"\n\n<b>● Итого:</b> \n\n {cart['attributes']['formatted_price']} ({cart['attributes']['products_amount']} шт.)"
 
-    message += f"\n<b>Итого: {cart['attributes']['formatted_price']}</b>"
-
-    await bot.send_message(chat_id=update.from_user.id, text=message, parse_mode="HTML")
+    await bot.send_message(
+        chat_id=update.from_user.id,
+        text=message,
+        reply_markup=create_kb(),
+        parse_mode="HTML"
+    )
     
 
 async def store(update: CallbackQuery, bot: Bot): 
