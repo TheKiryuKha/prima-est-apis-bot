@@ -7,7 +7,6 @@ def create_kb():
         text='Оформить заказ',
         callback_data='test'
     )
-    kb.adjust(1)
 
     kb.button(
         text='Изменить',
@@ -17,6 +16,6 @@ def create_kb():
         text='Очистить',
         callback_data='clear_cart'
     )
-    kb.adjust(2)
+    kb.adjust(1, 2)
 
     return kb.as_markup()
