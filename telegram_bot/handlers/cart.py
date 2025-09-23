@@ -19,7 +19,7 @@ async def store(update: CallbackQuery, bot: Bot):
 
     option_id = update.data.split('_')[1]
 
-    product = add_product_to_cart(option_id, 1, update.from_user.id) 
+    product = add_product_to_cart(option_id, update.from_user.id) 
     cart = get_cart(update.message.chat.id)
     
     await bot.edit_message_reply_markup(
