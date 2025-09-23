@@ -24,7 +24,7 @@ final class CartItemResource extends JsonResource
         $product = $option->product;
 
         return [
-            'id' => $product->id,
+            'id' => $this->resource->id,
             'attributes' => [
                 'amount' => $this->resource->amount,
                 'title' => $product->title,

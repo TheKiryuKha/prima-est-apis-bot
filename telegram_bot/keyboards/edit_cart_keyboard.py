@@ -11,13 +11,13 @@ def edit_cart_keyboard(cart):
 
         kb.button(
             text=f"-1",
-            callback_data='test'
+            callback_data=f'decrease_cart:{item['id']}'
         )
         kb.button(
             text=f"+1",
-            callback_data='test'
+            callback_data=f'increase_cart:{item['id']}'
         )
         
-    kb.adjust(1, 2)
+    kb.adjust(1, 2, repeat=len(cart['attributes']['items']))
 
     return kb.as_markup()

@@ -44,3 +44,6 @@ def get_cart_with_items(chat_id: int):
 
 def destroy_cart(cart_id: int):
     return requests.delete(API_URL + f'carts/{cart_id}', headers=headers)
+
+def delete_cart_item(item_id: int):
+    return requests.patch(API_URL + f'cart_items/{item_id}', headers=headers)
