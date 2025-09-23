@@ -15,8 +15,8 @@ def create_kb():
     )
     kb.button(
         text='Очистить',
-        callback_data='clear'
+        callback_data='clear_cart'
     )
     kb.adjust(2)
-    
+
     return kb.as_markup()

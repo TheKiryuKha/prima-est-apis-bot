@@ -1,6 +1,6 @@
 from aiogram import Bot
 from aiogram.types import CallbackQuery
-from utils.api import add_product_to_cart, get_cart, get_cart_with_items
+from utils.api import add_product_to_cart, get_cart, get_cart_with_items, destroy_cart
 from keyboards.options_keyboard import options_kb
 from utils.clear_messages import clear
 from keyboards.cart_keyboard import create_kb
@@ -11,6 +11,11 @@ async def show(update: CallbackQuery, bot: Bot):
     message = f"<b>● Товары:</b>\n"
 
     cart = get_cart_with_items(update.from_user.id)
+
+    if cart['attributes']['products_amount'] == 0:
+        message += f"Вы ещё не добавили товары"
+        await bot.send_message(chat_id=update.from_user.id, text=message, parse_mode="HTML")
+        return
     
     for item in cart['attributes']['items']:
         message += f"\n<b>{item['attributes']['title']}</b>"
@@ -41,3 +46,11 @@ async def store(update: CallbackQuery, bot: Bot):
         message_id= update.message.message_id,
         reply_markup=options_kb(product['attributes']['options'], cart)
     );
+
+async def destroy(update: CallbackQuery, bot: Bot):
+    update.answer()
+
+    cart = get_cart(update.from_user.id)
+    destroy_cart(cart['id'])
+
+    await show(update, bot)

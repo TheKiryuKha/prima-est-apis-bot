@@ -4,7 +4,7 @@ from aiogram.filters import Command
 from handlers.start import get_start
 from handlers.shop import shop
 from handlers.product import index, show
-from handlers.cart import store, show as cart_show
+from handlers.cart import store, show as cart_show, destroy
 
 def register_handlers(dp: Dispatcher):
     dp.message.register(get_start, Command(commands='start'))
@@ -18,3 +18,5 @@ def register_handlers(dp: Dispatcher):
 
     dp.callback_query.register(cart_show, F.data == 'cart')
     dp.message.register(cart_show, Command(commands='cart'))
+
+    dp.callback_query.register(destroy, F.data == 'clear_cart')
