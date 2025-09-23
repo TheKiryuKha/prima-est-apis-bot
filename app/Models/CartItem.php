@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read int $cart_id
  * @property-read int $product_option_id
  * @property-read int $amount
+ * @property-read string $formatted_price
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  * @property-read Cart $cart
@@ -38,5 +39,13 @@ final class CartItem extends Model
     public function product_option(): BelongsTo
     {
         return $this->belongsTo(ProductOption::class);
+    }
+
+    public function getFormattedPriceAttribute(): string
+    {
+        return number_format(
+            num: $this->product_option->price * $this->amount,
+            thousands_separator: ' '
+        ).'₽';
     }
 }

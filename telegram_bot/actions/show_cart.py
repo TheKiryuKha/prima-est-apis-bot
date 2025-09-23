@@ -14,7 +14,7 @@ async def show_cart(cart, update, bot):
     
     for item in cart['attributes']['items']:
         message += f"\n<b>{item['attributes']['title']}</b>"
-        message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']}"
+        message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']} = {item['attributes']['total_price']}"
         message += f"\n———"
     message += f"\n\n<b>● Итого:</b> \n\n {cart['attributes']['formatted_price']} ({cart['attributes']['products_amount']} шт.)"
 
@@ -36,7 +36,7 @@ async def show_cart_edit(cart, update, bot):
     
     for item in cart['attributes']['items']:
         message += f"\n<b>{item['attributes']['title']}</b>"
-        message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']}"
+        message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']} = {item['attributes']['total_price']}"
         message += f"\n———"
     message += f"\n\n<b>● Итого:</b> \n\n {cart['attributes']['formatted_price']} ({cart['attributes']['products_amount']} шт.)"
 

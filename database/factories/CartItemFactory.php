@@ -33,4 +33,14 @@ final class CartItemFactory extends Factory
             'amount' => $amount,
         ]);
     }
+
+    public function price(int $price): self
+    {
+        return $this->state(fn (array $attributes): array => [
+            'product_option_id' => ProductOption::factory()
+                ->price($price)
+                ->create()
+                ->id,
+        ]);
+    }
 }

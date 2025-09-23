@@ -22,8 +22,6 @@ async def store(update: CallbackQuery, bot: Bot):
     product = add_product_to_cart(option_id, 1, update.from_user.id) 
     cart = get_cart(update.message.chat.id)
     
-    update.answer(f"Добавлено в корзину")
-
     await bot.edit_message_reply_markup(
         chat_id= update.message.chat.id,
         message_id= update.message.message_id,

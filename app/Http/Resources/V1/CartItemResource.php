@@ -34,6 +34,7 @@ final class CartItemResource extends JsonResource
                 'volume' => $option->volume,
                 'price' => $option->price,
                 'formatted_price' => $option->formatted_price,
+                'total_price' => $this->resource->formatted_price,
                 'type' => $option->type,
             ],
         ];

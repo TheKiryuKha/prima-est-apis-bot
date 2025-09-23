@@ -31,3 +31,12 @@ it('belongs to ProductOption', function () {
 
     expect($cart_item->product_option)->toBeInstanceOf(ProductOption::class);
 });
+
+test('formatted price', function () {
+    $cart_item = CartItem::factory()
+        ->price(100)
+        ->amount(3)
+        ->create();
+
+    expect($cart_item->formatted_price)->toBe('300₽');
+});
