@@ -30,6 +30,7 @@ final class CartItemResource extends JsonResource
                 'title' => $product->title,
                 'description' => $product->description,
                 'honey_plants' => $product->honey_plants,
+                'option_id' => $option->id,
                 'volume' => $option->volume,
                 'price' => $option->price,
                 'formatted_price' => $option->formatted_price,

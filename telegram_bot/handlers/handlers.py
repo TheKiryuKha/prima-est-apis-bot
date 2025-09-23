@@ -5,7 +5,8 @@ from handlers.start import get_start
 from handlers.shop import shop
 from handlers.product import index, show
 from handlers.cart import store, show as cart_show, destroy, edit
-from handlers.cart_item import destroy as cart_item_destroy
+from handlers.cart_item import destroy as cart_item_destroy, store as cart_item_store
+from handlers.none import none
 
 def register_handlers(dp: Dispatcher):
     dp.message.register(get_start, Command(commands='start'))
@@ -25,3 +26,7 @@ def register_handlers(dp: Dispatcher):
     dp.callback_query.register(edit, F.data == 'edit_cart')
 
     dp.callback_query.register(cart_item_destroy, F.data.startswith('decrease_cart:'))
+    dp.callback_query.register(cart_item_store, F.data.startswith('increase_cart:'))
+    
+    
+    dp.callback_query.register(none, F.data == 'none')

@@ -15,7 +15,7 @@ def edit_cart_keyboard(cart):
         )
         kb.button(
             text=f"+1",
-            callback_data=f'increase_cart:{item['id']}'
+            callback_data=f'increase_cart:{item['attributes']['option_id']}'
         )
         
     kb.adjust(1, 2, repeat=len(cart['attributes']['items']))
