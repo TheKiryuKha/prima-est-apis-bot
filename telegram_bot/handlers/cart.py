@@ -4,31 +4,14 @@ from utils.api import add_product_to_cart, get_cart, get_cart_with_items, destro
 from keyboards.options_keyboard import options_kb
 from utils.clear_messages import clear
 from keyboards.cart_keyboard import create_kb
+from actions.show_cart import show_cart
 
 async def show(update: CallbackQuery, bot: Bot):
     await clear(update, bot)
 
-    message = f"<b>● Товары:</b>\n"
-
     cart = get_cart_with_items(update.from_user.id)
 
-    if cart['attributes']['products_amount'] == 0:
-        message += f"Вы ещё не добавили товары"
-        await bot.send_message(chat_id=update.from_user.id, text=message, parse_mode="HTML")
-        return
-    
-    for item in cart['attributes']['items']:
-        message += f"\n<b>{item['attributes']['title']}</b>"
-        message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']}"
-        message += f"\n———"
-    message += f"\n\n<b>● Итого:</b> \n\n {cart['attributes']['formatted_price']} ({cart['attributes']['products_amount']} шт.)"
-
-    await bot.send_message(
-        chat_id=update.from_user.id,
-        text=message,
-        reply_markup=create_kb(),
-        parse_mode="HTML"
-    )
+    await show_cart(cart, update, bot)
     
 
 async def store(update: CallbackQuery, bot: Bot): 

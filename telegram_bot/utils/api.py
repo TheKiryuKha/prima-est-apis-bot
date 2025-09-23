@@ -43,5 +43,4 @@ def get_cart_with_items(chat_id: int):
     ).json()['data']
 
 def destroy_cart(cart_id: int):
-    print(API_URL + f'carts/{cart_id}')
     return requests.delete(API_URL + f'carts/{cart_id}', headers=headers)
