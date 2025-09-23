@@ -3,8 +3,8 @@ from aiogram.types import CallbackQuery
 from utils.api import add_product_to_cart, get_cart, get_cart_with_items, destroy_cart
 from keyboards.options_keyboard import options_kb
 from utils.clear_messages import clear
-from keyboards.cart_keyboard import create_kb
 from actions.show_cart import show_cart
+from keyboards.edit_cart_keyboard import edit_cart_keyboard
 
 async def show(update: CallbackQuery, bot: Bot):
     await clear(update, bot)
@@ -28,6 +28,15 @@ async def store(update: CallbackQuery, bot: Bot):
         chat_id= update.message.chat.id,
         message_id= update.message.message_id,
         reply_markup=options_kb(product['attributes']['options'], cart)
+    );
+
+async def edit(update: CallbackQuery, bot: Bot):
+    cart = get_cart_with_items(update.from_user.id)
+    
+    await bot.edit_message_reply_markup(
+        chat_id= update.message.chat.id,
+        message_id= update.message.message_id,
+        reply_markup=edit_cart_keyboard(cart)
     );
 
 async def destroy(update: CallbackQuery, bot: Bot):

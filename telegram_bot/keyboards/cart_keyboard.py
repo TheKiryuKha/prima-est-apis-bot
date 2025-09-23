@@ -11,7 +11,7 @@ def create_kb():
 
     kb.button(
         text='Изменить',
-        callback_data='change'
+        callback_data='edit_cart'
     )
     kb.button(
         text='Очистить',
