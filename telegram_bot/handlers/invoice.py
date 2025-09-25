@@ -25,3 +25,34 @@ async def start_create(update: CallbackQuery, bot: Bot):
         reply_markup=create_kb(),
         parse_mode='HTML'
     )
+
+async def create(update: CallbackQuery, bot: Bot, state: FSMContext):
+    await update.answer()
+    
+    message = (
+        f"Отлично! Приступим к оформлению заказа\n\n"
+
+        f"Отправь, пожалуйста, свой данные в таком формате:\n\n"
+
+        f"<b>"
+        f"ФИО (как в паспорте)\n"
+        f"Номер телефона (без плюса, только цифры),\n"
+        f"Адрес ближайшего пункта выдачи СДЭК\n\n"
+        f"</b>"
+
+        f"Пример:\n\n"
+
+        f"<b>"
+        f"Пупкин Василий Алексеевич\n"
+        f"375447191945\n"
+        f"ул. Ильича, 26\n\n"
+        f"</b>"
+        f"❗️Внимание, я чувствителен к формату"
+    )
+
+    await bot.send_message(
+        chat_id=update.from_user.id,
+        text=message,
+        parse_mode='HTML'
+    )
+    await state.set_state(StoreInvoiceState.regData)
