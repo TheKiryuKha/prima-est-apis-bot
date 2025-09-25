@@ -5,7 +5,7 @@ def create_kb():
 
     kb.button(
         text='Оформить заказ',
-        callback_data='test'
+        callback_data='start_create_invoice'
     )
 
     kb.button(
