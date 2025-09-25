@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\V1\Invoice;
 
+use App\Rules\V1\CheckAvailableQuantity;
 use Illuminate\Foundation\Http\FormRequest;
 
 final class CreateInvoiceRequest extends FormRequest
@@ -14,7 +15,7 @@ final class CreateInvoiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cart_id' => ['required', 'exists:carts,id'],
+            'cart_id' => ['required', 'exists:carts,id', new CheckAvailableQuantity],
             'first_name' => ['required', 'string', 'min:2', 'max:32'],
             'last_name' => ['required', 'string', 'min:2', 'max:32'],
             'middle_name' => ['required', 'string', 'min:2', 'max:32'],
