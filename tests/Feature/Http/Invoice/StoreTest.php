@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 use App\Enums\InvoiceStatus;
 use App\Models\Cart;
-use App\Models\CartItem;
-use Illuminate\Support\Facades\Log;
 
 beforeEach(function () {
     $this->cart = Cart::factory()->withItem(3)->create();
@@ -46,14 +44,28 @@ it("save's invoice in DB", function () {
 it("save's invoice items in DB", function () {
     $this->post(route('api:v1:invoices:store'), $this->data);
 
-    Log::info(CartItem::all());
-
     $this->assertDatabaseHas('invoice_items', [
         'amount' => 3,
     ]);
 });
 
-it("clear's cart");
+it("clear's cart", function () {
+    $this->post(route('api:v1:invoices:store'), $this->data);
+
+    $this->assertDatabaseHas('carts', [
+        'id' => $this->cart->id,
+        'products_amount' => 0,
+        'price' => 0,
+    ]);
+});
+
+it("delete's cart items", function () {
+    $this->post(route('api:v1:invoices:store'), $this->data);
+
+    $this->assertDatabaseCount('cart_items', 0);
+});
+
+test('user cannot buy unexisting products');
 
 it("return's correct data", function () {
     $response = $this->post(route('api:v1:invoices:store'), $this->data);

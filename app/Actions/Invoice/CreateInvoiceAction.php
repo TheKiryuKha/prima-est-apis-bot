@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\Invoice;
 
+use App\Actions\Cart\DeleteCartAction;
 use App\Enums\InvoiceStatus;
 use App\Models\Cart;
 use App\Models\Invoice;
@@ -12,7 +13,8 @@ use Illuminate\Support\Facades\DB;
 final readonly class CreateInvoiceAction
 {
     public function __construct(
-        private CreateInvoiceItemsAction $action
+        private CreateInvoiceItemsAction $create_items,
+        private DeleteCartAction $delete_cart
     ) {}
 
     /**
@@ -40,7 +42,8 @@ final readonly class CreateInvoiceAction
                 'user_id' => $cart->user_id,
             ]);
 
-            $this->action->handle($invoice, $cart);
+            $this->create_items->handle($invoice, $cart);
+            $this->delete_cart->handle($cart);
 
             return $invoice;
         });
