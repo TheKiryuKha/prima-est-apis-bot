@@ -53,6 +53,8 @@ it("save's invoice items in DB", function () {
     ]);
 });
 
+it("clear's cart");
+
 it("return's correct data", function () {
     $response = $this->post(route('api:v1:invoices:store'), $this->data);
 

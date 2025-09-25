@@ -7,7 +7,8 @@ from handlers.product import index, show
 from handlers.cart import store, show as cart_show, destroy, edit
 from handlers.cart_item import destroy as cart_item_destroy, store as cart_item_store
 from handlers.none import none
-from handlers.invoice import start_create, create as create_invoice
+from handlers.invoice import start_create, create as create_invoice, store as store_invoice
+from state.StoreInvoiceState import StoreInvoiceState
 
 
 def register_handlers(dp: Dispatcher):
@@ -35,3 +36,4 @@ def register_handlers(dp: Dispatcher):
 
     dp.callback_query.register(start_create, F.data == 'start_create_invoice')
     dp.callback_query.register(create_invoice, F.data == 'create_invoice')
+    dp.message.register(store_invoice, StoreInvoiceState.regData)

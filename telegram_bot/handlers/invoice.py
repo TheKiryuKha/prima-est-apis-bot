@@ -4,6 +4,9 @@ from aiogram.fsm.context import FSMContext
 from state.StoreInvoiceState import StoreInvoiceState
 from utils.clear_messages import clear
 from keyboards.start_create_invoice_keyboard import create_kb
+from aiogram.types import Message
+from utils.api import get_cart, create_invoice
+from actions.generate_invoice_text import generate
 
 
 async def start_create(update: CallbackQuery, bot: Bot):
@@ -56,3 +59,45 @@ async def create(update: CallbackQuery, bot: Bot, state: FSMContext):
         parse_mode='HTML'
     )
     await state.set_state(StoreInvoiceState.regData)
+
+async def store(update: Message, state: FSMContext, bot: Bot):
+    lines = update.text.split('\n')
+
+    if len(lines) != 3:
+        await bot.send_message(
+            update.from_user.id,
+            f'❗️ Похоже ты ввел не все необходимые данные или ввел их в неверном формате. Пожалуйста, попробуй еще раз'
+        )
+        return    
+
+    fio_parts = lines[0].split()
+
+    last_name = fio_parts[0]
+    first_name = fio_parts[1]
+    middle_name = fio_parts[2]
+    
+    phone = lines[1].strip()
+    
+    address = lines[2].strip()
+    
+    cart = get_cart(update.from_user.id)
+    response = create_invoice(
+        cart['id'],
+        first_name,
+        last_name,
+        middle_name,
+        address,
+        phone
+    )
+
+    if response.status_code == 201:
+        await state.clear() 
+        await clear(update, bot)
+
+        invoice = response.json()['data']
+        
+        await bot.send_message(
+            chat_id=update.from_user.id,
+            text=generate(invoice),
+            parse_mode='HTML'
+        )

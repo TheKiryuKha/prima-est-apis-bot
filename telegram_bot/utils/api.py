@@ -46,3 +46,21 @@ def destroy_cart(cart_id: int):
 
 def delete_cart_item(item_id: int):
     return requests.patch(API_URL + f'cart_items/{item_id}', headers=headers)
+
+def create_invoice(
+    cart_id: int,
+    first_name: str,
+    last_name: str,
+    middle_name: str,
+    delivery_address: str,
+    phone: str
+):
+    data={
+        'cart_id': cart_id,
+        'first_name': first_name,
+        'last_name': last_name,
+        'middle_name': middle_name,
+        'delivery_address': delivery_address,
+        'phone': phone 
+    }
+    return requests.post(API_URL + f'invoices', headers=headers, json=data)
