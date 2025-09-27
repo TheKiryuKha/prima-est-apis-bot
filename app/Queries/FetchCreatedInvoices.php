@@ -8,7 +8,7 @@ use App\Enums\InvoiceStatus;
 use App\Models\Invoice;
 use Illuminate\Database\Eloquent\Builder;
 
-final readonly class FetchInvoices
+final readonly class FetchCreatedInvoices
 {
     /**
      * @param  Builder<Invoice>  $query
@@ -17,6 +17,6 @@ final readonly class FetchInvoices
     public function handle(Builder $query): Builder
     {
         return $query
-            ->where('status', InvoiceStatus::Paid);
+            ->where('status', InvoiceStatus::Created);
     }
 }

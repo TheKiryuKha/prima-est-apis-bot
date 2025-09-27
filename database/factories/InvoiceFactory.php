@@ -19,7 +19,7 @@ final class InvoiceFactory extends Factory
     public function definition(): array
     {
         return [
-            'status' => InvoiceStatus::Paid,
+            'status' => InvoiceStatus::Created,
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'middle_name' => fake()->firstName(),
