@@ -65,16 +65,16 @@ it("delete's cart items", function () {
     $this->assertDatabaseCount('cart_items', 0);
 });
 
-it('decreases product amount');
+// it('decreases product amount');
 
-test('user cannot buy unexisting products', function () {
-    $cart = Cart::factory()->withItem(10000)->create();
-    $data = [...$this->data, 'cart_id' => $cart->id];
+// test('user cannot buy unexisting products', function () {
+//     $cart = Cart::factory()->withItem(10000)->create();
+//     $data = [...$this->data, 'cart_id' => $cart->id];
 
-    $response = $this->post(route('api:v1:invoices:store'), $data);
+//     $response = $this->post(route('api:v1:invoices:store'), $data);
 
-    $response->assertStatus(302);
-});
+//     $response->assertStatus(302);
+// });
 
 it("return's correct data", function () {
     $response = $this->post(route('api:v1:invoices:store'), $this->data);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Models\Cart;
+use App\Models\Invoice;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -41,6 +42,22 @@ final class UserFactory extends Factory
                     ->withItem($items_amount)
                     ->for($user)
                     ->create();
+            });
+    }
+
+    public function withInvoice(): self
+    {
+        return $this->state(fn (array $attributes): array => [])
+            ->afterCreating(function (User $user): void {
+                Invoice::factory()->for($user)->create();
+            });
+    }
+
+    public function withExpiredInvoice(): self
+    {
+        return $this->state(fn (array $attributes): array => [])
+            ->afterCreating(function (User $user): void {
+                Invoice::factory()->for($user)->expired()->create();
             });
     }
 }

@@ -27,7 +27,14 @@ final class InvoiceFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'price' => 0,
             'user_id' => User::factory(),
-            'expires_at' => now()->addMinutes(5),
+            'expires_at' => now()->addMinutes(30),
         ];
+    }
+
+    public function expired(): self
+    {
+        return $this->state(fn (array $attrbibutes): array => [
+            'expires_at' => now()->subMinutes(40),
+        ]);
     }
 }

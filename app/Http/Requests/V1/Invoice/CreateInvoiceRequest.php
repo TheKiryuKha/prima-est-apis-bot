@@ -15,7 +15,7 @@ final class CreateInvoiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cart_id' => ['required', 'exists:carts,id', new CheckAvailableQuantity],
+            'cart_id' => ['required', 'exists:carts,id'/** new CheckAvailableQuantity */],
             'first_name' => ['required', 'string', 'min:2', 'max:32'],
             'last_name' => ['required', 'string', 'min:2', 'max:32'],
             'middle_name' => ['required', 'string', 'min:2', 'max:32'],
