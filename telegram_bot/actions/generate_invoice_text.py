@@ -29,3 +29,23 @@ def generate(invoice):
     message += "📩 Данные для отслеживания придут в этом диалоге с ботом"
 
     return message
+
+def generate_for_admin(invoice):
+    message = (
+        f"<b>Заказ от {invoice['attributes']['username']} </b>\n"
+        f"ID: {invoice['attributes']['user_id']}\n\n"
+        f"ФИО: {invoice['attributes']['last_name']} "
+            f"{invoice['attributes']['first_name']} "
+            f"{invoice['attributes']['middle_name']}\n"
+        f"Номер телефона: {invoice['attributes']['phone']}\n\n"
+        f"<b> Адрес СДЭК: {invoice['attributes']['delivery_address']}\n\n </b>"
+        f"● Товары:\n"  
+    )
+
+    for item in invoice['attributes']['items']:
+        message += f"\n<b>{item['attributes']['title']}</b>"
+        message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']} = {item['attributes']['total_price']}"
+        message += f"\n———"
+        message += f"\n\n<b>● 💰 Итого: {invoice['attributes']['formatted_price']} </b>"
+
+    return message

@@ -64,3 +64,6 @@ def create_invoice(
         'phone': phone 
     }
     return requests.post(API_URL + f'invoices', headers=headers, json=data)
+
+def get_invoice(chat_id: int):
+    return requests.get(API_URL + f'users/{chat_id}/invoice', headers=headers).json()['data']

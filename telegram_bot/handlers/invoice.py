@@ -5,8 +5,10 @@ from state.StoreInvoiceState import StoreInvoiceState
 from utils.clear_messages import clear
 from keyboards.start_create_invoice_keyboard import create_kb
 from aiogram.types import Message
-from utils.api import get_cart, create_invoice
-from actions.generate_invoice_text import generate
+from utils.api import get_cart, create_invoice, get_invoice
+from actions.generate_invoice_text import generate, generate_for_admin
+from config import ADMIN_ID
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 async def start_create(update: CallbackQuery, bot: Bot):
@@ -91,7 +93,7 @@ async def store(update: Message, state: FSMContext, bot: Bot):
     )
 
     if response.status_code == 201:
-        await state.clear() 
+        await state.set_state(StoreInvoiceState.waitingForPayment) 
         await clear(update, bot)
 
         invoice = response.json()['data']
@@ -101,3 +103,37 @@ async def store(update: Message, state: FSMContext, bot: Bot):
             text=generate(invoice),
             parse_mode='HTML'
         )
+
+async def pay(update: Message, state: FSMContext, bot: Bot):
+    # try:
+
+        invoice = get_invoice(update.from_user.id)
+
+        message = generate_for_admin(invoice)
+
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="💵 Принять оплату", callback_data=f"mark_paid_invoice:{invoice['id']}")]
+        ])
+
+        await bot.send_message(
+            chat_id=ADMIN_ID,
+            text=message,
+            parse_mode='HTML',
+            reply_markup=keyboard
+        )
+
+        await bot.forward_message(
+            chat_id=ADMIN_ID,
+            from_chat_id=update.chat.id,
+            message_id=update.message_id
+        )
+
+        await clear(update, bot)
+
+        await bot.send_message(
+            chat_id=update.from_user.id,
+            text=f"Отлично! Благодарим за оплату. Скоро бот отправит вам данные для отслеживания. По любым вопросам можете обарщаться в поддержку"
+        )
+
+    # сделать клавиатуру
+    # отправить в группу с админом
