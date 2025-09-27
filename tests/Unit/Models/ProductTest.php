@@ -14,23 +14,19 @@ test('to array', function () {
         ->toBe([
             'id',
             'title',
-            'type',
-            'status',
             'description',
-            'amount',
             'category_id',
             'created_at',
             'updated_at',
-            'honey_plants',
         ]);
 });
 
-test('status', function () {
-    $product = Product::factory()->create();
+// test('status', function () {
+//     $product = Product::factory()->create();
 
-    expect($product->status)
-        ->toBeInstanceOf(ProductStatus::class);
-});
+//     expect($product->status)
+//         ->toBeInstanceOf(ProductStatus::class);
+// });
 
 it('belongs to Category', function () {
     $product = Product::factory()->create();

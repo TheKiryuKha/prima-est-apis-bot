@@ -52,11 +52,8 @@ test('include items', function () {
                         'attributes' => [
                             'title',
                             'description',
-                            'honey_plants',
-                            'volume',
                             'price',
                             'formatted_price',
-                            'type',
                         ],
                     ],
                 ],

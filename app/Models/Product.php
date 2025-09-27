@@ -17,11 +17,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 /**
  * @property-read int $id
  * @property-read string $title
- * @property-read string $type
- * @property-read ProductStatus $status
- * @property-read string $honey_plants
  * @property-read string $description
- * @property-read int $amount
  * @property-read int $category_id
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at

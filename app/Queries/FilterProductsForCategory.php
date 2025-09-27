@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Queries;
 
-use App\Enums\ProductStatus;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,7 +18,6 @@ final readonly class FilterProductsForCategory
     {
         return $query
             ->where('category_id', $category->id)
-            ->where('status', '!=', ProductStatus::Hidden)
             ->has('options')
             ->with('options');
     }

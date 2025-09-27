@@ -25,11 +25,7 @@ final class ProductResource extends JsonResource
             'type' => 'product',
             'attributes' => [
                 'title' => $this->resource->title,
-                'type' => $this->resource->type,
-                'status' => $this->resource->status,
                 'description' => $this->resource->description,
-                'amount' => $this->resource->amount,
-                'honey_plants' => $this->resource->honey_plants,
                 'options' => ProductOptionResource::collection(
                     $this->whenLoaded('options')
                 ),

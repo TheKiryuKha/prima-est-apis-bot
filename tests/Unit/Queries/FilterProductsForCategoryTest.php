@@ -15,12 +15,6 @@ beforeEach(function () {
         ->has(ProductOption::factory(), 'options')
         ->create();
 
-    $this->hidden_product = Product::factory()
-        ->for($this->category)
-        ->has(ProductOption::factory(), 'options')
-        ->hidden()
-        ->create();
-
     $this->without_options = Product::factory()
         ->for($this->category)
         ->create();
@@ -34,13 +28,13 @@ it("return's the list of products", function () {
     expect($products->get())->toHaveCount(3);
 });
 
-it("dont return's hidden product's", function () {
-    $query = app(FilterProductsForCategory::class);
+// it("dont return's hidden product's", function () {
+//     $query = app(FilterProductsForCategory::class);
 
-    $products = $query->handle(Product::query(), $this->category);
+//     $products = $query->handle(Product::query(), $this->category);
 
-    expect($products->get())->not->toContain($this->hidden_product);
-});
+//     expect($products->get())->not->toContain($this->hidden_product);
+// });
 
 it("dont return's product without options", function () {
     $query = app(FilterProductsForCategory::class);

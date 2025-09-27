@@ -36,11 +36,7 @@ it("return's correct data", function () {
                 'type',
                 'attributes' => [
                     'title',
-                    'type',
-                    'status',
                     'description',
-                    'amount',
-                    'honey_plants',
                     'options' => [
                         '*' => [
                             'id',
