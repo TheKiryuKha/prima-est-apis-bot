@@ -5,7 +5,7 @@ from state.StoreInvoiceState import StoreInvoiceState
 from utils.clear_messages import clear
 from keyboards.start_create_invoice_keyboard import create_kb
 from aiogram.types import Message
-from utils.api import get_cart, create_invoice, get_invoice
+from utils.api import get_cart, create_invoice, get_invoice, mark_invoice_as_paid
 from actions.generate_invoice_text import generate, generate_for_admin
 from config import ADMIN_ID
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -105,35 +105,44 @@ async def store(update: Message, state: FSMContext, bot: Bot):
         )
 
 async def pay(update: Message, state: FSMContext, bot: Bot):
-    # try:
+    
+    invoice = get_invoice(update.from_user.id)
 
-        invoice = get_invoice(update.from_user.id)
+    message = generate_for_admin(invoice)
 
-        message = generate_for_admin(invoice)
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="💵 Принять оплату", callback_data=f"mark_paid_invoice:{invoice['id']}")]
+    ])
 
-        keyboard = InlineKeyboardMarkup(inline_keyboard=[
-            [InlineKeyboardButton(text="💵 Принять оплату", callback_data=f"mark_paid_invoice:{invoice['id']}")]
-        ])
+    await bot.send_message(
+        chat_id=ADMIN_ID,
+        text=message,
+        parse_mode='HTML',
+        reply_markup=keyboard
+    )
 
-        await bot.send_message(
-            chat_id=ADMIN_ID,
-            text=message,
-            parse_mode='HTML',
-            reply_markup=keyboard
-        )
+    await bot.forward_message(
+        chat_id=ADMIN_ID,
+        from_chat_id=update.chat.id,
+        message_id=update.message_id
+    )
 
-        await bot.forward_message(
-            chat_id=ADMIN_ID,
-            from_chat_id=update.chat.id,
-            message_id=update.message_id
-        )
+    await clear(update, bot)
 
-        await clear(update, bot)
+    await bot.send_message(
+        chat_id=update.from_user.id,
+        text=f"Отлично! Благодарим за оплату. Скоро бот отправит вам данные для отслеживания. По любым вопросам можете обарщаться в поддержку"
+    )
 
-        await bot.send_message(
-            chat_id=update.from_user.id,
-            text=f"Отлично! Благодарим за оплату. Скоро бот отправит вам данные для отслеживания. По любым вопросам можете обарщаться в поддержку"
-        )
+    await state.clear()
 
-    # сделать клавиатуру
-    # отправить в группу с админом
+async def mark_paid(update: CallbackQuery, bot: Bot):
+    update.answer()
+
+    invoice_id = int(update.data.split(":")[1])
+    mark_invoice_as_paid(invoice_id)
+
+    await bot.send_message(
+        chat_id=update.from_user.id,
+        text=f"Заказ помечен как оплаченный. Он ожидает отправки. \n\nОтправьте /get_invoices в этот чат, чтобы получить список неоплаченных заказов"
+    )

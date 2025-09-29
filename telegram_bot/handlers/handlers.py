@@ -9,7 +9,7 @@ from handlers.cart_item import destroy as cart_item_destroy, store as cart_item_
 from handlers.none import none
 from handlers.invoice import start_create, create as create_invoice, store as store_invoice
 from state.StoreInvoiceState import StoreInvoiceState
-from handlers.invoice import pay
+from handlers.invoice import pay, mark_paid
 
 
 def register_handlers(dp: Dispatcher):
@@ -40,3 +40,4 @@ def register_handlers(dp: Dispatcher):
     dp.message.register(store_invoice, StoreInvoiceState.regData)
 
     dp.message.register(pay, StoreInvoiceState.waitingForPayment)
+    dp.callback_query.register(mark_paid, F.data.startswith('mark_paid_invoice:'))
