@@ -22,7 +22,7 @@ final class UserFactory extends Factory
     {
         return [
             'username' => fake()->userName(),
-            'chat_id' => fake()->randomNumber(),
+            'chat_id' => fake()->unique()->randomNumber(),
             'remember_token' => Str::random(10),
         ];
     }

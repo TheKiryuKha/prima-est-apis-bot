@@ -32,6 +32,14 @@ final class InvoiceItem extends Model
         return $this->belongsTo(ProductOption::class);
     }
 
+    /**
+     * @return BelongsTo<Invoice, $this>
+     */
+    public function invoice(): BelongsTo
+    {
+        return $this->belongsTo(Invoice::class);
+    }
+
     public function getFormattedPriceAttribute(): string
     {
         return number_format(

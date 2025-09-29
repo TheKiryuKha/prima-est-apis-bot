@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Enums\InvoiceStatus;
+use App\Models\Invoice;
+use App\Models\InvoiceItem;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -31,10 +33,30 @@ final class InvoiceFactory extends Factory
         ];
     }
 
+    public function paid(): self
+    {
+        return $this->state(fn (array $attrbibutes): array => [
+            'status' => InvoiceStatus::Paid,
+        ]);
+    }
+
     public function expired(): self
     {
         return $this->state(fn (array $attrbibutes): array => [
             'expires_at' => now()->subMinutes(40),
         ]);
+    }
+
+    public function withItems(int $amount = 1): self
+    {
+        return $this->state(
+            fn (array $attrbibutes): array => []
+        )->afterCreating(function (Invoice $invoice): void {
+
+            InvoiceItem::factory()
+                ->for($invoice)
+                ->amount(3)
+                ->create();
+        });
     }
 }

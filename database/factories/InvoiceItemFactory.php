@@ -24,4 +24,11 @@ final class InvoiceItemFactory extends Factory
             'amount' => 1,
         ];
     }
+
+    public function amount(int $amount): self
+    {
+        return $this->state(fn (array $attrbibutes): array => [
+            'amount' => $amount,
+        ]);
+    }
 }

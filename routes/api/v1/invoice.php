@@ -6,6 +6,7 @@ use App\Http\Controllers\V1\InvoiceController;
 use App\Http\Controllers\V1\PayInvoiceController;
 use App\Http\Controllers\V1\SendInvoiceController;
 
+Route::get('/', [InvoiceController::class, 'index'])->name('index');
 Route::post('/', [InvoiceController::class, 'store'])->name('store');
 
 Route::patch('/{invoice}/paid', PayInvoiceController::class)->name('pay');
