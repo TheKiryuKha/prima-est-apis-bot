@@ -53,7 +53,7 @@ def generate_for_admin(invoice):
 def generate_for_shipping(invoice):
     message = (
         f"<b>Заказ от @{invoice['attributes']['username']} </b>\n"
-        f"ID: {invoice['attributes']['user_chat_id']}\n\n"
+        f"ID: <code>{invoice['attributes']['user_chat_id']}</code>\n\n"
         f"<b>ФИО: {invoice['attributes']['last_name']} "
             f"{invoice['attributes']['first_name']} "
             f"{invoice['attributes']['middle_name']}\n"
