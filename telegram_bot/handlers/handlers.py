@@ -10,6 +10,7 @@ from handlers.none import none
 from handlers.invoice import start_create, create as create_invoice, store as store_invoice
 from state.StoreInvoiceState import StoreInvoiceState
 from handlers.invoice import pay, mark_paid, get_paid, mark_as_sent
+from handlers.send import send
 
 
 def register_handlers(dp: Dispatcher):
@@ -44,3 +45,5 @@ def register_handlers(dp: Dispatcher):
 
     dp.message.register(get_paid, Command(commands='to_ship'))
     dp.callback_query.register(mark_as_sent, F.data.startswith('mark_sent_invoice:'))
+
+    dp.message.register(send, Command(commands='send'))
