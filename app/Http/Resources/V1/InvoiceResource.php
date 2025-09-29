@@ -24,7 +24,7 @@ final class InvoiceResource extends JsonResource
             'id' => $this->resource->id,
             'type' => 'invoice',
             'attributes' => [
-                'user_id' => $this->resource->user_id,
+                'user_chat_id' => $this->resource->user->chat_id,
                 'username' => $this->resource->user->username,
                 'first_name' => $this->resource->first_name,
                 'last_name' => $this->resource->last_name,

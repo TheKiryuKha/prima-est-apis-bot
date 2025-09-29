@@ -5,10 +5,11 @@ from state.StoreInvoiceState import StoreInvoiceState
 from utils.clear_messages import clear
 from keyboards.start_create_invoice_keyboard import create_kb
 from aiogram.types import Message
-from utils.api import get_cart, create_invoice, get_invoice, mark_invoice_as_paid
-from actions.generate_invoice_text import generate, generate_for_admin
+from utils.api import get_cart, create_invoice, get_invoice, mark_invoice_as_paid, get_paid_invoices, mark_invoice_as_sent
+from actions.generate_invoice_text import generate, generate_for_admin, generate_for_shipping
 from config import ADMIN_ID
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+import re
 
 
 async def start_create(update: CallbackQuery, bot: Bot):
@@ -146,3 +147,60 @@ async def mark_paid(update: CallbackQuery, bot: Bot):
         chat_id=update.from_user.id,
         text=f"Заказ помечен как оплаченный. Он ожидает отправки. \n\nОтправьте /get_invoices в этот чат, чтобы получить список неоплаченных заказов"
     )
+
+async def get_paid(update: Message, bot: Bot):
+
+    if int(update.from_user.id) != int(ADMIN_ID):
+        return
+
+    invoices = get_paid_invoices()
+
+    if len(invoices) == 0:
+        await bot.send_message(
+            chat_id=update.from_user.id,
+            text=f"Нет заказов ожидающих отправки"
+        )
+        return
+
+    await bot.send_message(
+        chat_id=update.from_user.id,
+        text=f"Заказы ожидающие отправки:"
+    )
+
+    for invoice in invoices:
+        message = generate_for_shipping(invoice)
+
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="📦 Пометить отправленным", callback_data=f"mark_sent_invoice:{invoice['id']}")]
+        ])
+
+        await bot.send_message(
+            chat_id=update.from_user.id,
+            text=message,
+            parse_mode='HTML',
+            reply_markup=keyboard
+        )
+
+async def mark_as_sent(update: CallbackQuery, bot: Bot):
+    await update.answer()
+
+    id = update.data.split(":")[1]
+    response = mark_invoice_as_sent(id)
+
+    if response.status_code != 200:
+        await bot.send_message(
+            chat_id=update.from_user.id,
+            text=f"Не удалось пометить заказ как оплаченный"
+        )
+        return
+
+    new_keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="✅ Отправлено", callback_data="none")]
+    ])
+
+    await bot.edit_message_reply_markup(
+        chat_id=update.from_user.id,
+        message_id=update.message.message_id,
+        reply_markup=new_keyboard
+    )
+    
