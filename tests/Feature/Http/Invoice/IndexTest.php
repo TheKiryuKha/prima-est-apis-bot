@@ -23,7 +23,7 @@ it("return's correct data", function () {
                     'id',
                     'type',
                     'attributes' => [
-                        'user_id',
+                        'user_chat_id',
                         'username',
                         'first_name',
                         'last_name',
