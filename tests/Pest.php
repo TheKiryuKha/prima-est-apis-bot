@@ -13,6 +13,7 @@ declare(strict_types=1);
 |
 */
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Sleep;
 
 pest()->extend(Tests\TestCase::class)
@@ -56,4 +57,79 @@ expect()->extend('toBeOne', function () {
 function something()
 {
     // ..
+}
+
+function get_products_data(): array
+{
+    return [
+        [
+            'image' => UploadedFile::fake()->image('eternal_spring.png'),
+            'title' => 'Вечная Весна',
+            'description' => 'Мёд Вечная весна - вечный, как моё нытьё по этому проекту!',
+            'category' => 'Мёд',
+            'options' => [
+                [
+                    'type' => 'стекло',
+                    'price' => 1000,
+                    'volume' => '100 мл',
+                ],
+                [
+                    'type' => 'стекло',
+                    'price' => 2000,
+                    'volume' => '200 мл',
+                ],
+                [
+                    'type' => 'глина (горшок)',
+                    'price' => 5000,
+                    'volume' => '100 мл',
+                ],
+            ],
+        ],
+        [
+            'image' => UploadedFile::fake()->image('lining.png'),
+            'title' => 'Забрус',
+            'description' => 'Жуй, не подавись!',
+            'category' => 'Забрус',
+            'options' => [
+                [
+                    'type' => 'кр. пакет',
+                    'price' => 1000,
+                    'volume' => '100 мл',
+                ],
+                [
+                    'type' => 'кр. пакет',
+                    'price' => 2000,
+                    'volume' => '200 мл',
+                ],
+                [
+                    'type' => 'кр. пакет',
+                    'price' => 5000,
+                    'volume' => '100 мл',
+                ],
+            ],
+        ],
+        [
+            'image' => UploadedFile::fake()->image('lining.png'),
+            'title' => 'Мёд из Сайлент-Хилла',
+            'description' => 'Я реально думал что сюжет игры проходит в Гуково',
+            'category' => 'Мёд',
+            'options' => [
+                [
+                    'type' => 'стекло',
+                    'price' => 1000,
+                    'volume' => '100 мл',
+                ],
+                [
+                    'type' => 'стекло',
+                    'price' => 2000,
+                    'volume' => '200 мл',
+                ],
+                [
+                    'type' => 'глина (горшок)',
+                    'price' => 5000,
+                    'volume' => '100 мл',
+                ],
+            ],
+        ],
+    ];
 }
