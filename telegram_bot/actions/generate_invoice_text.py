@@ -14,7 +14,8 @@ def generate(invoice):
         message += f"\n<b>{item['attributes']['title']}</b>"
         message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']} = {item['attributes']['total_price']}"
         message += f"\n———"
-        message += f"\n\n<b>● 💰 Итого: {invoice['attributes']['formatted_price']} </b>"
+    
+    message += f"\n\n<b>● 💰 Итого: {invoice['attributes']['formatted_price']} </b>"
 
     message += f"\n\n ⏳ Оставшееся время для оплаты: 30 мин. После этого времени данные заказа будут удалены"
     message += f"\n\n <b>Способы оплаты:</b>\n\n"
@@ -46,7 +47,8 @@ def generate_for_admin(invoice):
         message += f"\n<b>{item['attributes']['title']}</b>"
         message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']} = {item['attributes']['total_price']}"
         message += f"\n———"
-        message += f"\n\n<b>● 💰 Итого: {invoice['attributes']['formatted_price']} </b>"
+    
+    message += f"\n\n<b>● 💰 Итого: {invoice['attributes']['formatted_price']} </b>"
 
     return message
 
@@ -59,11 +61,11 @@ def generate_for_shipping(invoice):
             f"{invoice['attributes']['middle_name']}\n"
         f"Номер телефона: {invoice['attributes']['phone']}\n"
         f"Адрес СДЭК: {invoice['attributes']['delivery_address']}\n\n </b>"
-        f"● Товары:\n"  
+        f"● Товары:"  
     )
 
     for item in invoice['attributes']['items']:
-        message += f"\n<b>{item['attributes']['title']} x {item['attributes']['amount']}</b>"
-        message += f"\n {item['attributes']['volume']} | {item['attributes']['type']}"
+        message += f"\n\n<b>{item['attributes']['title']} x {item['attributes']['amount']}</b>"
+        message += f"\n{item['attributes']['volume']} | {item['attributes']['type']}"
 
     return message

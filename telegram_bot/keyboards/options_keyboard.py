@@ -16,5 +16,10 @@ def options_kb(options, cart):
             callback_data='cart'
         )
 
+    kb.button(
+        text=f"Назад",
+        callback_data='shop'
+    )
+
     kb.adjust(1)
     return kb.as_markup()   

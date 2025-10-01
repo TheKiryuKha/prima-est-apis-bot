@@ -44,5 +44,6 @@ def generate_cart_text(cart):
         message += f"\n<b>{item['attributes']['title']}</b>"
         message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']} = {item['attributes']['total_price']}"
         message += f"\n———"
-        message += f"\n\n<b>● Итого:</b> \n\n {cart['attributes']['formatted_price']} ({cart['attributes']['products_amount']} шт.)"
-        return message
+        
+    message += f"\n\n<b>● Итого:</b> \n\n {cart['attributes']['formatted_price']} ({cart['attributes']['products_amount']} шт.)"
+    return message

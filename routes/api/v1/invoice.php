@@ -9,5 +9,5 @@ use App\Http\Controllers\V1\SendInvoiceController;
 Route::get('/', [InvoiceController::class, 'index'])->name('index');
 Route::post('/', [InvoiceController::class, 'store'])->name('store');
 
-Route::patch('/{invoice}/paid', PayInvoiceController::class)->name('pay');
+Route::patch('/{invoice}/pay', PayInvoiceController::class)->name('pay');
 Route::patch('/{invoice}/send', SendInvoiceController::class)->name('send');

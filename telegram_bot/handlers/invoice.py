@@ -132,7 +132,7 @@ async def pay(update: Message, state: FSMContext, bot: Bot):
 
     await bot.send_message(
         chat_id=update.from_user.id,
-        text=f"Отлично! Благодарим за оплату. Скоро бот отправит вам данные для отслеживания. По любым вопросам можете обарщаться в поддержку"
+        text=f"Отлично! Благодарим за оплату. Скоро бот отправит вам данные для отслеживания. По любым вопросам можете обращаться в поддержку"
     )
 
     await state.clear()
@@ -145,7 +145,7 @@ async def mark_paid(update: CallbackQuery, bot: Bot):
 
     await bot.send_message(
         chat_id=update.from_user.id,
-        text=f"Заказ помечен как оплаченный. Он ожидает отправки. \n\nОтправьте /get_invoices в этот чат, чтобы получить список неоплаченных заказов"
+        text=f"Заказ помечен как оплаченный. Он ожидает отправки. \n\nОтправьте /to_ship в этот чат, чтобы получить список неотправленных заказов"
     )
 
 async def get_paid(update: Message, bot: Bot):
@@ -180,6 +180,12 @@ async def get_paid(update: Message, bot: Bot):
             parse_mode='HTML',
             reply_markup=keyboard
         )
+
+    await bot.send_message(
+        chat_id=update.from_user.id,
+        text="После отправки заказа введите команду:\n\n<b>/send {id пользователя} {текст}</b>\n\nчтобы отправить клиенту данные для отслеживания заказа",
+        parse_mode='HTML',
+    )
 
 async def mark_as_sent(update: CallbackQuery, bot: Bot):
     await update.answer()

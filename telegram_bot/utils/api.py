@@ -69,7 +69,7 @@ def get_invoice(chat_id: int):
     return requests.get(API_URL + f'users/{chat_id}/invoice', headers=headers).json()['data']
 
 def mark_invoice_as_paid(invoice_id: int):
-    return requests.get(API_URL + f'invoices/{invoice_id}/pay', headers=headers).json()
+    return requests.patch(API_URL + f'invoices/{invoice_id}/pay', headers=headers).json()
 
 def get_paid_invoices():
     return requests.get(API_URL + f'invoices?filter[status]=paid', headers=headers).json()['data']

@@ -8,14 +8,14 @@ def create_kb():
         callback_data='start_create_invoice'
     )
 
-    kb.button(
-        text='Изменить',
-        callback_data='edit_cart'
-    )
+    # kb.button(
+    #     text='Изменить',
+    #     callback_data='edit_cart'
+    # )
     kb.button(
         text='Очистить',
         callback_data='clear_cart'
     )
-    kb.adjust(1, 2)
+    kb.adjust(1)
 
     return kb.as_markup()
