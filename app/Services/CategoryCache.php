@@ -22,4 +22,9 @@ final readonly class CategoryCache
 
         return $categories;
     }
+
+    public function forget(): void
+    {
+        Cache::forget(self::KEY);
+    }
 }

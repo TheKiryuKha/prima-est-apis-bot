@@ -13,7 +13,6 @@ declare(strict_types=1);
 |
 */
 
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Sleep;
 
 pest()->extend(Tests\TestCase::class)
@@ -59,14 +58,14 @@ function something()
     // ..
 }
 
-function get_products_data(): array
+function get_product_data(): array
 {
-    return [
+    return
         [
-            'image' => UploadedFile::fake()->image('eternal_spring.png'),
+            'image_link' => 'https://as1.ftcdn.net/v2/jpg/05/75/85/00/1000_F_575850011_l8mFVIrFN9fFxmWcoKEGIjM0uX181dnL.jpg',
             'title' => 'Вечная Весна',
             'description' => 'Мёд Вечная весна - вечный, как моё нытьё по этому проекту!',
-            'category' => 'Мёд',
+            'category_title' => 'Мёд',
             'options' => [
                 [
                     'type' => 'стекло',
@@ -84,52 +83,5 @@ function get_products_data(): array
                     'volume' => '100 мл',
                 ],
             ],
-        ],
-        [
-            'image' => UploadedFile::fake()->image('lining.png'),
-            'title' => 'Забрус',
-            'description' => 'Жуй, не подавись!',
-            'category' => 'Забрус',
-            'options' => [
-                [
-                    'type' => 'кр. пакет',
-                    'price' => 1000,
-                    'volume' => '100 мл',
-                ],
-                [
-                    'type' => 'кр. пакет',
-                    'price' => 2000,
-                    'volume' => '200 мл',
-                ],
-                [
-                    'type' => 'кр. пакет',
-                    'price' => 5000,
-                    'volume' => '100 мл',
-                ],
-            ],
-        ],
-        [
-            'image' => UploadedFile::fake()->image('lining.png'),
-            'title' => 'Мёд из Сайлент-Хилла',
-            'description' => 'Я реально думал что сюжет игры проходит в Гуково',
-            'category' => 'Мёд',
-            'options' => [
-                [
-                    'type' => 'стекло',
-                    'price' => 1000,
-                    'volume' => '100 мл',
-                ],
-                [
-                    'type' => 'стекло',
-                    'price' => 2000,
-                    'volume' => '200 мл',
-                ],
-                [
-                    'type' => 'глина (горшок)',
-                    'price' => 5000,
-                    'volume' => '100 мл',
-                ],
-            ],
-        ],
-    ];
+        ];
 }

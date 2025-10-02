@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\V1;
 
-use App\Actions\Product\BulkCreateProduct;
-use App\Http\Requests\V1\Product\CreateProductsRequest;
+use App\Actions\Product\CreateProductAction;
+use App\Http\Requests\V1\Product\CreateProductRequest;
 use App\Http\Resources\V1\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
@@ -22,7 +22,7 @@ final readonly class ProductController
         return ProductResource::collection($products->get());
     }
 
-    public function store(CreateProductsRequest $request, BulkCreateProduct $action): JsonResponse
+    public function store(CreateProductRequest $request, CreateProductAction $action): JsonResponse
     {
         $action->handle($request->validated());
 

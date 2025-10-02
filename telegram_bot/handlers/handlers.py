@@ -9,9 +9,10 @@ from handlers.cart_item import destroy as cart_item_destroy, store as cart_item_
 from handlers.none import none
 from handlers.invoice import start_create, create as create_invoice, store as store_invoice
 from state.StoreInvoiceState import StoreInvoiceState
+from state.StoreProductState import StoreProductState
 from handlers.invoice import pay, mark_paid, get_paid, mark_as_sent
 from handlers.send import send
-from handlers.save import save
+from handlers.save import create as save_create_products, store as save_store_products
 
 
 def register_handlers(dp: Dispatcher):
@@ -48,3 +49,6 @@ def register_handlers(dp: Dispatcher):
     dp.callback_query.register(mark_as_sent, F.data.startswith('mark_sent_invoice:'))
 
     dp.message.register(send, Command(commands='send'))
+
+    dp.message.register(save_create_products, Command(commands='save'))
+    dp.message.register(save_store_products, StoreProductState.regData)

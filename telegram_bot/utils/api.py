@@ -76,3 +76,6 @@ def get_paid_invoices():
 
 def mark_invoice_as_sent(invoice_id: int):
     return requests.patch(API_URL + f'invoices/{invoice_id}/send', headers=headers)
+
+def create_product(data):
+    return requests.post(API_URL + f'products', headers=headers, json=data)
