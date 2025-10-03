@@ -79,3 +79,6 @@ def mark_invoice_as_sent(invoice_id: int):
 
 def create_product(data):
     return requests.post(API_URL + f'products', headers=headers, json=data)
+
+def delete_product(product_id: int):
+    return requests.delete(API_URL + f'products/{product_id}', headers=headers)

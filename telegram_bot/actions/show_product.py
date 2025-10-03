@@ -16,6 +16,6 @@ async def show_product(update: CallbackQuery, bot: Bot, product: List[Any]):
         chat_id=update.from_user.id,
         photo=FSInputFile(product['attributes']['media']['path']),
         caption=text,
-        reply_markup=options_kb(product['attributes']['options'], cart),
+        reply_markup=options_kb(product, cart, update.from_user.id),
         parse_mode="HTML"
     )
