@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductOption;
@@ -44,6 +46,24 @@ final class ProductFactory extends Factory
                 ProductOption::factory($amount)
                     ->for($product)
                     ->create();
+            });
+    }
+
+    public function inCart(): self
+    {
+        return $this->state(fn (array $attributes): array => [])
+            ->afterCreating(function (Product $product): void {
+                $option = $product->options()->first();
+
+                $cart = Cart::factory()->create([
+                    'products_amount' => 1,
+                    'price' => $option->price,
+                ]);
+
+                CartItem::factory()
+                    ->for($cart)
+                    ->for($option, 'product_option')
+                    ->create(['amount' => 1]);
             });
     }
 }

@@ -6,9 +6,11 @@ namespace App\Models;
 
 use App\Models\Traits\HasPrice;
 use Carbon\CarbonInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property-read int $id
@@ -20,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  * @property-read Product $product
+ * @property-read Collection<int, CartItem> $cart_items
  */
 final class ProductOption extends Model
 {
@@ -34,5 +37,13 @@ final class ProductOption extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * @return HasMany<CartItem, $this>
+     */
+    public function cart_items(): HasMany
+    {
+        return $this->hasMany(CartItem::class);
     }
 }
