@@ -25,7 +25,7 @@ async def store(update: CallbackQuery, bot: Bot):
     await bot.edit_message_reply_markup(
         chat_id= update.message.chat.id,
         message_id= update.message.message_id,
-        reply_markup=options_kb(product['attributes']['options'], cart)
+        reply_markup=options_kb(product, cart, update.from_user.id)
     );
 
 async def edit(update: CallbackQuery, bot: Bot):
