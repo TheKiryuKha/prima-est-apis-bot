@@ -5,17 +5,17 @@ def edit_cart_keyboard(cart):
 
     for item in cart['attributes']['items']:
         kb.button(
-            text=f'{item['attributes']['title']} | {item['attributes']['amount']} шт. | {item['attributes']['formatted_price']}',
+            text=f"{item['attributes']['title']} | {item['attributes']['amount']} шт. | {item['attributes']['formatted_price']}",
             callback_data='none'
         )
 
         kb.button(
             text=f"-1",
-            callback_data=f'decrease_cart:{item['id']}'
+            callback_data=f"decrease_cart:{item['id']}"
         )
         kb.button(
             text=f"+1",
-            callback_data=f'increase_cart:{item['attributes']['option_id']}'
+            callback_data=f"increase_cart:{item['attributes']['option_id']}"
         )
         
     kb.adjust(1, 2, repeat=len(cart['attributes']['items']))

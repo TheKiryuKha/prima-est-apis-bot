@@ -6,8 +6,8 @@ def create_kb():
     kb = InlineKeyboardBuilder()
     for category in get_categories():
         kb.button(
-            text=f'{category['attributes']['title']}',
-            callback_data=f'category_' + f'{category['id']}'
+            text=f"{category['attributes']['title']}",
+            callback_data="category_" + f"{category['id']}"
         )
     kb.adjust(1)
     return kb.as_markup()
