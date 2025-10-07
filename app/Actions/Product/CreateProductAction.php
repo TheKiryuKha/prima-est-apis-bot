@@ -42,7 +42,7 @@ final readonly class CreateProductAction
 
             $product
                 ->addMediaFromUrl($attr['image_link'])
-                ->toMediaCollection('image_link');
+                ->toMediaCollection('image');
 
             $this->cache->forget();
 

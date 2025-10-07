@@ -30,6 +30,7 @@ async def store(update: Message, bot: Bot, state: FSMContext):
     response = create_product(product)
 
     if response.status_code != 201:
+        print(response.content)
         await bot.send_message(
             chat_id=update.from_user.id,
             text=f"Не удалось сохранить продукт. Пожалуйста, попробуйте еще раз"
