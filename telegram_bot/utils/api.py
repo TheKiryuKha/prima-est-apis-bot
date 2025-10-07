@@ -23,14 +23,14 @@ def add_product_to_cart(option_id: int, chat_id: int):
         "chat_id": chat_id,
         "option_id": option_id,
     }
-    return requests.post(API_URL + 'cart_items/', data=payload).json()['data']
+    return requests.post(API_URL + 'cart_items', json=payload).json()['data']
 
 def create_user(chat_id: int, username: str):
     data = {
         "chat_id": chat_id,
         "username": username
     }
-    return requests.post(API_URL + 'users/', headers=headers, json=data)
+    return requests.post(API_URL + 'users', headers=headers, json=data)
 
 def get_cart(chat_id: int):
     return requests.get(API_URL + f'users/{chat_id}/cart').json()['data']
