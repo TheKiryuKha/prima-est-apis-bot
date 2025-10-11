@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
+        "antistress-store/cdek-sdk-v2": "^1.5",
         "laravel/framework": "^12.18.0",
         "laravel/sanctum": "^4.0",
         "nunomaduro/essentials": "@dev",

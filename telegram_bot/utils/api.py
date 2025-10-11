@@ -82,3 +82,9 @@ def create_product(data):
 
 def delete_product(product_id: int):
     return requests.delete(API_URL + f'products/{product_id}', headers=headers)
+
+def get_cities(city: str):
+    data = {
+        'city': city
+    }
+    return requests.get(API_URL + f'invoices/get_cities', headers=headers, json=data)

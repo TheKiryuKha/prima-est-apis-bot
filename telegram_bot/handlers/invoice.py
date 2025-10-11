@@ -32,7 +32,34 @@ async def start_create(update: CallbackQuery, bot: Bot):
         parse_mode='HTML'
     )
 
-async def create(update: CallbackQuery, bot: Bot, state: FSMContext):
+async def create_city(update: CallbackQuery, bot: Bot, state: FSMContext):
+    await update.answer()
+
+    # сообщение с просьбой скинуть город
+    message = (
+        f"Отлично! Приступим к оформлению заказа\n\n"
+
+        f"Отправь, пожалуйста, <b>город</b> для доставки:\n\n"
+    )
+
+    await bot.send_message(
+        chat_id=update.from_user.id,
+        text=message,
+        parse_mode='HTML'
+    )
+    await state.set_state(StoreInvoiceState.regCity)
+
+async def store_city(update: Message, bot: Bot, state: FSMContext):
+    await clear(update, bot)
+    
+    city = update.text
+    
+    # получить город
+    # отправить его в api
+    # отправить сообщение с городами
+
+
+async def create_data(update: CallbackQuery, bot: Bot, state: FSMContext):
     await update.answer()
     
     message = (

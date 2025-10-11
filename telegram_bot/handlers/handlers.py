@@ -7,7 +7,7 @@ from handlers.product import index, show, destroy as destroy_product
 from handlers.cart import store, show as cart_show, destroy, edit
 from handlers.cart_item import destroy as cart_item_destroy, store as cart_item_store
 from handlers.none import none
-from handlers.invoice import start_create, create as create_invoice, store as store_invoice
+from handlers.invoice import start_create, store as store_invoice, create_city, store_city
 from state.StoreInvoiceState import StoreInvoiceState
 from state.StoreProductState import StoreProductState
 from handlers.invoice import pay, mark_paid, get_paid, mark_as_sent
@@ -39,7 +39,9 @@ def register_handlers(dp: Dispatcher):
     dp.callback_query.register(none, F.data == 'none')
 
     dp.callback_query.register(start_create, F.data == 'start_create_invoice')
-    dp.callback_query.register(create_invoice, F.data == 'create_invoice')
+    dp.callback_query.register(create_city, F.data == 'create_city')
+    dp.message.register(store_city, StoreInvoiceState.regCity)
+    # dp.callback_query.register(create_invoice, F.data == 'create_invoice')
     dp.message.register(store_invoice, StoreInvoiceState.regData)
 
     dp.message.register(pay, StoreInvoiceState.waitingForPayment)
