@@ -9,6 +9,7 @@ beforeEach(function () {
     $this->cart = Cart::factory()->withItem(3)->create();
     $this->data = [
         'cart_id' => $this->cart->id,
+        'city_code' => 6539,
         'first_name' => 'Трахомир',
         'last_name' => 'Древарх',
         'middle_name' => 'Просветленный',
