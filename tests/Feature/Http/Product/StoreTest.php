@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 it("return's correct status code", function () {
     $this->post(
@@ -41,6 +44,15 @@ it('drops Cache', function () {
     $this->post(route('api:v1:products:store'), get_product_data());
 
     expect(Cache::has('categories'))->toBeFalse();
+});
+
+it("save's media", function () {
+    Storage::fake();
+
+    $this->post(route('api:v1:products:store'), get_product_data());
+
+    expect(Product::first()->getFirstMedia('image'))
+        ->toBeInstanceOf(Media::class);
 });
 
 test('validation', function () {
