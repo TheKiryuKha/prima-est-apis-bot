@@ -8,11 +8,14 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductOption;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 
 final class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        Cache::flush();
+
         $honey = Category::create([
             'title' => 'Мёд',
         ]);
