@@ -129,13 +129,14 @@ def parse_option_line(line: str) -> Dict[str, Any] | None:
         # Разделяем на части по |
         parts = [part.strip() for part in clean_line.split('|')]
         
-        if len(parts) < 3:
+        if len(parts) < 4:
             return None
         
         volume = parts[0]  # "250 мл", "100 гр" и т.д.
         package_type = parts[1]  # "стекло", "глина (горшок)" и т.д.
         price_str = parts[2]  # "590 р.", "1 400 р." и т.д.
-        
+        weight = parts[3]
+
         # Очищаем цену: убираем "р.", пробелы, и другие нецифровые символы кроме цифр
         price_clean = re.sub(r'[^\d]', '', price_str)
         
@@ -147,7 +148,8 @@ def parse_option_line(line: str) -> Dict[str, Any] | None:
         return {
             "type": package_type,
             "price": price,
-            "volume": volume
+            "volume": volume,
+            "weight": weight 
         }
     
     except (ValueError, IndexError, AttributeError):
