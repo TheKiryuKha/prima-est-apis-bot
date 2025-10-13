@@ -42,7 +42,7 @@ final readonly class CDEKAPIService
 
     public function getDeliveryPrice(int $city_code, int $weight): float
     {
-        $tariff = new Tariff()
+        $tariff = (new Tariff())
             ->setTariffCode(136)
             ->setCityCodes(137, $city_code)
             ->setPackageWeight($weight);

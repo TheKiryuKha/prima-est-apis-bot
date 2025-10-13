@@ -58,7 +58,7 @@ def create_invoice(
 ):
     data={
         'cart_id': cart_id,
-        'city_code': city_code,
+        'city_code': int(city_code),
         'first_name': first_name,
         'last_name': last_name,
         'middle_name': middle_name,

@@ -73,7 +73,7 @@ async def store_city(update: Message, bot: Bot, state: FSMContext):
 async def create_data(update: CallbackQuery, bot: Bot, state: FSMContext):
     await clear(update, bot)
 
-    await state.update_data(city_code=update.data.split(':')[1])
+    await state.update_data(city_code=update.data.split('_')[1])
     
     message = (
         f"Отлично! Приступим к оформлению заказа\n\n"
@@ -124,7 +124,7 @@ async def store(update: Message, state: FSMContext, bot: Bot):
     address = lines[2].strip()
     
     cart = get_cart(update.from_user.id)
-    city_code = await state.get_data()
+    city_code = (await state.get_data())['city_code']
     response = create_invoice(
         cart['id'],
         city_code,
@@ -146,6 +146,26 @@ async def store(update: Message, state: FSMContext, bot: Bot):
             text=generate(invoice),
             parse_mode='HTML'
         )
+        return;
+
+    await bot.send_message(
+        chat_id=update.from_user.id,
+        text=f"❗️ Извините, произошла ошибка на сервере. Пожалуйста, попробуйте еще раз. Код ошибки: {response.status_code}"
+    )
+    await bot.send_message(
+        chat_id=update.from_user.id,
+        text=f"❗️ {response.content}"
+    )
+
+    print(
+        cart['id'],
+        city_code,
+        first_name,
+        last_name,
+        middle_name,
+        address,
+        phone
+    )
 
 async def pay(update: Message, state: FSMContext, bot: Bot):
     

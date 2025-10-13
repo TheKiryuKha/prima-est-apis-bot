@@ -45,16 +45,19 @@ final class DatabaseSeeder extends Seeder
             'volume' => '250 мл',
             'type' => '🫙 стекло',
             'price' => 900,
+            'weight' => 1000,
         ]);
         ProductOption::factory()->for($product)->create([
             'volume' => '1000 мл',
             'type' => '🫙 стекло',
             'price' => 2200,
+            'weight' => 1000,
         ]);
         ProductOption::factory()->for($product)->create([
             'volume' => '200 мл',
             'type' => '🍯 горшок(глина)',
             'price' => 2200,
+            'weight' => 1000,
         ]);
 
         $product = Product::factory()->for($honey)->create([
@@ -74,16 +77,19 @@ final class DatabaseSeeder extends Seeder
             'volume' => '250 мл',
             'type' => '🫙 стекло',
             'price' => 900,
+            'weight' => 1000,
         ]);
         ProductOption::factory()->for($product)->create([
             'volume' => '1000 мл',
             'type' => '🫙 стекло',
             'price' => 2200,
+            'weight' => 1000,
         ]);
         ProductOption::factory()->for($product)->create([
             'volume' => '200 мл',
             'type' => '🍯 горшок(глина)',
             'price' => 2200,
+            'weight' => 1000,
         ]);
 
         $product = Product::factory()->for($lining)->create([
@@ -106,16 +112,19 @@ final class DatabaseSeeder extends Seeder
             'volume' => '250 мл',
             'type' => '🫙 стекло',
             'price' => 590,
+            'weight' => 1000,
         ]);
         ProductOption::factory()->for($product)->create([
             'volume' => '1000 мл',
             'type' => '🫙 стекло',
             'price' => 1400,
+            'weight' => 1000,
         ]);
         ProductOption::factory()->for($product)->create([
             'volume' => '200 мл',
             'type' => '🍯 горшок(глина)',
             'price' => 900,
+            'weight' => 1000,
         ]);
 
         $product = Product::factory()->for($royal_jelly)->create([
@@ -131,16 +140,19 @@ final class DatabaseSeeder extends Seeder
             'volume' => '250 мл',
             'type' => '🫙 стекло',
             'price' => 590,
+            'weight' => 1000,
         ]);
         ProductOption::factory()->for($product)->create([
             'volume' => '1000 мл',
             'type' => '🫙 стекло',
             'price' => 1400,
+            'weight' => 1000,
         ]);
         ProductOption::factory()->for($product)->create([
             'volume' => '200 мл',
             'type' => '🍯 горшок(глина)',
             'price' => 900,
+            'weight' => 1000,
         ]);
 
         $product = Product::factory()->for($polling)->create([
@@ -160,16 +172,19 @@ final class DatabaseSeeder extends Seeder
             'volume' => '100 гр',
             'type' => '📕 кр. пакет',
             'price' => 750,
+            'weight' => 1000,
         ]);
         ProductOption::factory()->for($product)->create([
             'volume' => '200 гр',
             'type' => '📕 кр. пакет',
             'price' => 1400,
+            'weight' => 1000,
         ]);
         ProductOption::factory()->for($product)->create([
             'volume' => '1000 гр',
             'type' => '📕 кр. пакет',
             'price' => 5000,
+            'weight' => 1000,
         ]);
     }
 }
