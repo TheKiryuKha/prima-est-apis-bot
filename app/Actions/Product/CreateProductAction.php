@@ -20,7 +20,7 @@ final readonly class CreateProductAction
      * title: string,
      * description: string,
      * category_title: string,
-     * options: array<array{type: string, volume: string, price: int}>
+     * options: array<array{type: string, volume: string, price: int, weight: int}>
      * } $attr
      */
     public function handle(array $attr): void

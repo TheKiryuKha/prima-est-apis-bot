@@ -13,10 +13,10 @@ return new class extends Migration
         Schema::table('invoices', function (Blueprint $table): void {
             $table->unsignedBigInteger('delivery_price')
                 ->after('price');
-            
+
             $table->unsignedBigInteger('total_price')
                 ->after('delivery_price');
-            
+
         });
     }
 };

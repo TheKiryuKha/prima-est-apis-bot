@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read string $volume
  * @property-read int $price
  * @property-read string $type
+ * @property-read int $weight
  * @property-read int $product_id
  * @property-read string $formatted_price
  * @property-read CarbonInterface $created_at

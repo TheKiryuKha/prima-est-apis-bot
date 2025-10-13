@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Enums\InvoiceStatus;
 use App\Models\Cart;
+use App\Models\Invoice;
 
 beforeEach(function () {
     $this->cart = Cart::factory()->withItem(3)->create();
@@ -33,10 +34,10 @@ it("save's invoice in DB", function () {
         'first_name' => $this->data['first_name'],
         'last_name' => $this->data['last_name'],
         'middle_name' => $this->data['middle_name'],
-        'delivery_address' => $this->data['delivery_address'],
+        'delivery_address' => 'Белоруссия (Беларусь), Гомельская область, Гомель, '.$this->data['delivery_address'],
         'phone' => $this->data['phone'],
         'user_id' => $this->cart->user_id,
-        'price' => ($this->cart->price + 500) * 100,
+        'price' => $this->cart->price * 100,
         'status' => InvoiceStatus::Created,
         'expires_at' => now()->addMinutes(5),
     ]);
@@ -66,17 +67,6 @@ it("delete's cart items", function () {
     $this->assertDatabaseCount('cart_items', 0);
 });
 
-// it('decreases product amount');
-
-// test('user cannot buy unexisting products', function () {
-//     $cart = Cart::factory()->withItem(10000)->create();
-//     $data = [...$this->data, 'cart_id' => $cart->id];
-
-//     $response = $this->post(route('api:v1:invoices:store'), $data);
-
-//     $response->assertStatus(302);
-// });
-
 it("return's correct data", function () {
     $response = $this->post(route('api:v1:invoices:store'), $this->data);
 
@@ -94,6 +84,8 @@ it("return's correct data", function () {
                 'phone',
                 'price',
                 'formatted_price',
+                'formatted_delivery_price',
+                'formatted_total_price',
                 'items' => [
                     '*' => [
                         'id',
@@ -124,4 +116,19 @@ test('validation', function () {
         'delivery_address',
         'phone',
     ]);
+});
+
+test('delivery price > 0', function () {
+    $this->post(route('api:v1:invoices:store'), $this->data);
+
+    expect(Invoice::firstOrFail()->delivery_price > 0)->toBeTrue();
+});
+
+test('total price = delivery_price + price', function () {
+    $this->post(route('api:v1:invoices:store'), $this->data);
+
+    $invoice = Invoice::first();
+
+    expect($invoice->delivery_price + $invoice->price)
+        ->toBe($invoice->total_price);
 });

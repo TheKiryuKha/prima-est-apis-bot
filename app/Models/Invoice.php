@@ -23,7 +23,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read string $phone
  * @property-read int $price
  * @property-read int $user_id
+ * @property-read int $delivery_price
+ * @property-read int $total_price
  * @property-read string $formatted_price
+ * @property-read string $formatted_delivery_price
+ * @property-read string $formatted_total_price
  * @property-read CarbonInterface $expires_at
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at

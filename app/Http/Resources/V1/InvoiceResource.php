@@ -33,6 +33,8 @@ final class InvoiceResource extends JsonResource
                 'phone' => $this->resource->phone,
                 'price' => $this->resource->price,
                 'formatted_price' => $this->resource->formatted_price,
+                'formatted_delivery_price' => $this->resource->formatted_delivery_price,
+                'formatted_total_price' => $this->resource->formatted_total_price,
                 'status' => $this->resource->status,
                 'items' => CartItemResource::collection(
                     $this->resource->items
