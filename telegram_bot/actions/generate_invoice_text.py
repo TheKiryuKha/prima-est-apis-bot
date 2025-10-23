@@ -15,18 +15,15 @@ def generate(invoice):
         message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']} = {item['attributes']['total_price']}"
         message += f"\n———"
     
-    message += f"\nСтоимость товаров: {invoice['attributes']['formatted_price']}"
-    message += f"\n\n 📦 Стоимость доставки: {invoice['attributes']['formatted_delivery_price']}"
-    message += f"\n\n<b>● 💰 Итого: {invoice['attributes']['formatted_total_price']} </b>"
+    message += f"\n\n<b>● 💰 Итого: {invoice['attributes']['formatted_price']} </b>"
 
     # message += f"\n\n ⏳ Оставшееся время для оплаты: 30 мин. После этого времени данные заказа будут удалены"
-    message += f"\n\n <b>Способы оплаты:</b>\n\n"
+    # message += f"\n\n <b>Способы оплаты:</b>\n\n"
     message += ( 
-            f"⚡️ <b>Перевод на карту</b> 👇\n\n"
-            f"Сбербанк: 2202 2083 2694 0252\n"
-            f"Тинькофф: 2200 7009 8343 7111\n\n"
-            f"<b>👾 Крипта 👾</b>\n\n"
-            f"USDT: sdjfhskfhskdfhjsdfj\n\n"
+            f"⚡️\n\n <b>Реквизиты для оплаты</b> 👇\n\n"
+            f"+7 (981) 111-25-43 \n"
+            f"Райффайзен\n"
+            f"(Куква Г.Аcd.)\n\n"
     )
     message += "‼️ <b> ВАЖНО: для завершения и отправки заказа отправьте скриншот 🧾 об оплате в этот чат.</b>\n"
     message += "📩 Данные для отслеживания придут в этом диалоге с ботом"
@@ -50,9 +47,7 @@ def generate_for_admin(invoice):
         message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']} = {item['attributes']['total_price']}"
         message += f"\n———"
     
-    message += f"\nСтоимость товаров: {invoice['attributes']['formatted_price']}"
-    message += f"\n\n 📦 Стоимость доставки: {invoice['attributes']['formatted_delivery_price']}"
-    message += f"\n\n<b>● 💰 Итого: {invoice['attributes']['formatted_total_price']} </b>"
+    message += f"\n\n<b>● 💰 Итого: {invoice['attributes']['formatted_price']} </b>"
 
     return message
 

@@ -38,11 +38,7 @@ def register_handlers(dp: Dispatcher):
     
     dp.callback_query.register(none, F.data == 'none')
 
-    dp.callback_query.register(start_create, F.data == 'start_create_invoice')
-    dp.callback_query.register(create_city, F.data == 'create_city')
-    dp.message.register(store_city, StoreInvoiceState.regCity)
-    # dp.callback_query.register(create_invoice, F.data == 'create_invoice')
-    dp.callback_query.register(create_data, F.data.startswith('city_'))
+    dp.callback_query.register(create_data, F.data == 'start_create_invoice')
     dp.message.register(store_invoice, StoreInvoiceState.regData)
 
     dp.message.register(pay, StoreInvoiceState.waitingForPayment)
