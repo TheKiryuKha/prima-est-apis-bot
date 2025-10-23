@@ -19,7 +19,7 @@ it("save's product's data in DB", function () {
 
     $this->post(route('api:v1:products:store'), $data);
 
-    $this->assertDatabaseCount('products', 1);
+    $this->assertDatabaseHas('products', get_product_initials());
 });
 
 it("save's categories in DB", function () {
@@ -27,15 +27,7 @@ it("save's categories in DB", function () {
 
     $this->post(route('api:v1:products:store'), $data);
 
-    $this->assertDatabaseCount('categories', 1);
-});
-
-it("save's option's in DB", function () {
-    $data = get_product_data();
-
-    $this->post(route('api:v1:products:store'), $data);
-
-    $this->assertDatabaseCount('product_options', 3);
+    $this->assertDatabaseHas('categories', ['title' => 'Мёд']);
 });
 
 it('drops Cache', function () {

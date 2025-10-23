@@ -71,20 +71,36 @@ function get_product_data(): array
                     'type' => 'стекло',
                     'price' => 1000,
                     'volume' => '100 мл',
-                    'weight' => 200,
                 ],
                 [
                     'type' => 'стекло',
                     'price' => 2000,
                     'volume' => '200 мл',
-                    'weight' => 300,
                 ],
                 [
                     'type' => 'глина (горшок)',
                     'price' => 5000,
                     'volume' => '100 мл',
-                    'weight' => 500,
                 ],
             ],
         ];
+}
+
+function get_product_initials(): array
+{
+    return [
+        'title' => 'Вечная Весна',
+        'description' => 'Мёд Вечная весна - вечный, как моё нытьё по этому проекту!',
+    ];
+}
+
+function get_product_option(): array
+{
+    return [
+        [
+            'type' => 'стекло',
+            'price' => 1000 * 100,
+            'volume' => '100 мл',
+        ],
+    ];
 }

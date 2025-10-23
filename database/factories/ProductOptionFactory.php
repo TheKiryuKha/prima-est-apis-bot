@@ -25,7 +25,6 @@ final class ProductOptionFactory extends Factory
                 'стекло',
                 'кр. пакет',
             ]),
-            'weight' => fake()->numberBetween(100, 5000),
             'product_id' => Product::factory(),
         ];
     }
