@@ -27,8 +27,6 @@ final class InvoiceFactory extends Factory
             'middle_name' => fake()->firstName(),
             'delivery_address' => fake()->address(),
             'phone' => fake()->phoneNumber(),
-            'delivery_price' => 0,
-            'total_price' => 0,
             'price' => 0,
             'user_id' => User::factory(),
             'expires_at' => now()->addMinutes(30),
@@ -56,35 +54,16 @@ final class InvoiceFactory extends Factory
         ]);
     }
 
-    public function delivery_price(int $delivery_price): self
-    {
-        return $this->state(fn (array $attrbibutes): array => [
-            'delivery_price' => $delivery_price,
-        ]);
-    }
-
-    public function total_price(int $total_price): self
-    {
-        return $this->state(fn (array $attrbibutes): array => [
-            'total_price' => $total_price,
-        ]);
-    }
-
     public function withItems(int $amount = 1): self
     {
         return $this->state(
             fn (array $attrbibutes): array => []
-        )->afterCreating(function (Invoice $invoice): void {
+        )->afterCreating(function (Invoice $invoice) use ($amount): void {
 
-            InvoiceItem::factory()
+            $items = InvoiceItem::factory()
                 ->for($invoice)
-                ->amount(3)
+                ->amount($amount)
                 ->create();
-
-            $invoice->update([
-                'total_price' => $invoice->price + 500,
-                'delivery_price' => 500,
-            ]);
         });
     }
 }

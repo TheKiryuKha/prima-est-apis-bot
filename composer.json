@@ -75,8 +75,7 @@
 
         "db:refresh": [
             "php artisan db:wipe --force",
-            "php artisan migrate",
-            "php artisan db:seed"
+            "php artisan migrate"
         ]
     },
     "extra": {

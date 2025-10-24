@@ -15,7 +15,6 @@ final class CreateInvoiceRequest extends FormRequest
     {
         return [
             'cart_id' => ['required', 'exists:carts,id'],
-            'city_code' => ['required', 'int'],
             'first_name' => ['required', 'string', 'min:2', 'max:32'],
             'last_name' => ['required', 'string', 'min:2', 'max:32'],
             'middle_name' => ['required', 'string', 'min:2', 'max:32'],
@@ -27,7 +26,6 @@ final class CreateInvoiceRequest extends FormRequest
     /**
      * @return array{
      * cart_id: int,
-     * city_code: int,
      * first_name: string,
      * last_name: string,
      * middle_name: string,
@@ -39,7 +37,6 @@ final class CreateInvoiceRequest extends FormRequest
     {
         /** @var array{
          * cart_id: int,
-         * city_code: int,
          * first_name: string,
          * last_name: string,
          * middle_name: string,

@@ -8,7 +8,7 @@ def options_kb(product, cart, chat_id):
 
     for option in options:
         kb.button(
-            text=f"• {option['attributes']['volume']} | "
+            text=f"•{option['attributes']['volume']} | "
                 + f"{option['attributes']['type']} | "
                 + f"{option['attributes']['formatted_price']}",
             callback_data="addToCart_" + f"{option['id']}"

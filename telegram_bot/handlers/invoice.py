@@ -83,7 +83,7 @@ async def create_data(update: CallbackQuery, bot: Bot, state: FSMContext):
         f"<b>"
         f"ФИО (как в паспорте)\n"
         f"Номер телефона (без плюса, только цифры),\n"
-        f"Адрес ближайшего пункта выдачи СДЭК\n\n"
+        f"Адрес ближайшего пункта выдачи СДЭК(обязательно укажи страну и город)\n\n"
         f"</b>"
 
         f"Пример:\n\n"
@@ -91,7 +91,7 @@ async def create_data(update: CallbackQuery, bot: Bot, state: FSMContext):
         f"<b>"
         f"Пупкин Василий Алексеевич\n"
         f"375447191945\n"
-        f"ул. Ильича, 26\n\n"
+        f"Беларусь, Гомель, ул. Ильича, 26\n\n"
         f"</b>"
         f"❗️Внимание, я чувствителен к формату"
     )
@@ -124,10 +124,8 @@ async def store(update: Message, state: FSMContext, bot: Bot):
     address = lines[2].strip()
     
     cart = get_cart(update.from_user.id)
-    city_code = (await state.get_data())['city_code']
     response = create_invoice(
         cart['id'],
-        city_code,
         first_name,
         last_name,
         middle_name,
@@ -152,20 +150,7 @@ async def store(update: Message, state: FSMContext, bot: Bot):
         chat_id=update.from_user.id,
         text=f"❗️ Извините, произошла ошибка на сервере. Пожалуйста, попробуйте еще раз. Код ошибки: {response.status_code}"
     )
-    await bot.send_message(
-        chat_id=update.from_user.id,
-        text=f"❗️ {response.content}"
-    )
 
-    print(
-        cart['id'],
-        city_code,
-        first_name,
-        last_name,
-        middle_name,
-        address,
-        phone
-    )
 
 async def pay(update: Message, state: FSMContext, bot: Bot):
     

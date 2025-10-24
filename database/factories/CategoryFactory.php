@@ -20,4 +20,11 @@ final class CategoryFactory extends Factory
             'title' => fake()->title(),
         ];
     }
+
+    public function title(string $title): self
+    {
+        return $this->state(fn (array $attributes): array => [
+            'title' => $title,
+        ]);
+    }
 }

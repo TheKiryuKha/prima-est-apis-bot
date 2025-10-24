@@ -18,15 +18,16 @@ it("delete's product", function () {
 
     $this->delete(route('api:v1:products:destroy', $product));
 
-    $this->assertDatabaseCount('products', 0);
+    $this->assertDatabaseMissing('products', ['id' => $product->id]);
 });
 
 it("delete's category if it's empty", function () {
     $product = Product::factory()->create();
+    $category_id = $product->category->id;
 
     $this->delete(route('api:v1:products:destroy', $product));
 
-    $this->assertDatabaseCount('categories', 0);
+    $this->assertDatabaseMissing('categories', ['id' => $category_id]);
 });
 
 it("NOT delete's category if it's not empty", function () {
@@ -34,15 +35,16 @@ it("NOT delete's category if it's not empty", function () {
 
     $this->delete(route('api:v1:products:destroy', $product));
 
-    $this->assertDatabaseCount('categories', 1);
+    $this->assertDatabaseHas('categories', ['id' => $product->category->id]);
 });
 
 it("delete's product options", function () {
     $product = Product::factory()->withOptions(3)->create();
+    $option_id = $product->options()->first()->id;
 
     $this->delete(route('api:v1:products:destroy', $product));
 
-    $this->assertDatabaseCount('product_options', 0);
+    $this->assertDatabaseMissing('product_options', ['id' => $option_id]);
 });
 
 it("clear's cache", function () {

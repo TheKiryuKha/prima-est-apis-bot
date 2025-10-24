@@ -17,7 +17,6 @@ test('to array', function () {
             'product_id',
             'created_at',
             'updated_at',
-            'weight',
         ]);
 });
 

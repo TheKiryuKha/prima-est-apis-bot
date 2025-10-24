@@ -22,7 +22,6 @@ final class CreateProductRequest extends FormRequest
             'options.*.type' => 'required|string|max:255',
             'options.*.price' => 'required|integer|min:0',
             'options.*.volume' => 'required|string',
-            'options.*.weight' => 'required|int',
         ];
     }
 
@@ -32,7 +31,7 @@ final class CreateProductRequest extends FormRequest
      * title: string,
      * description: string,
      * category_title: string,
-     * options: array<array{type: string, volume: string, price: int, weight: int}>
+     * options: array<array{type: string, volume: string, price: int}>
      * }
      */
     public function validated($key = null, $default = null): array
@@ -43,7 +42,7 @@ final class CreateProductRequest extends FormRequest
          * title: string,
          * description: string,
          * category_title: string,
-         * options: array<array{type: string, volume: string, price: int, weight: int}>
+         * options: array<array{type: string, volume: string, price: int}>
          * } $data
          */
         $data = parent::validated($key);

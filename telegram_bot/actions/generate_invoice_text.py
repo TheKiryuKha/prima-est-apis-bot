@@ -15,9 +15,7 @@ def generate(invoice):
         message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']} = {item['attributes']['total_price']}"
         message += f"\n———"
     
-    message += f"\nСтоимость товаров: {invoice['attributes']['formatted_price']}"
-    message += f"\n\n 📦 Стоимость доставки: {invoice['attributes']['formatted_delivery_price']}"
-    message += f"\n\n<b>● 💰 Итого: {invoice['attributes']['formatted_total_price']} </b>"
+    message += f"\n\n<b>● 💰 Итого: {invoice['attributes']['formatted_price']} </b>"
 
     # message += f"\n\n ⏳ Оставшееся время для оплаты: 30 мин. После этого времени данные заказа будут удалены"
     # message += f"\n\n <b>Способы оплаты:</b>\n\n"
@@ -49,9 +47,7 @@ def generate_for_admin(invoice):
         message += f"\n{item['attributes']['amount']} x {item['attributes']['formatted_price']} = {item['attributes']['total_price']}"
         message += f"\n———"
     
-    message += f"\nСтоимость товаров: {invoice['attributes']['formatted_price']}"
-    message += f"\n\n 📦 Стоимость доставки: {invoice['attributes']['formatted_delivery_price']}"
-    message += f"\n\n<b>● 💰 Итого: {invoice['attributes']['formatted_total_price']} </b>"
+    message += f"\n\n<b>● 💰 Итого: {invoice['attributes']['formatted_price']} </b>"
 
     return message
 
